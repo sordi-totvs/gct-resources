@@ -47,6 +47,29 @@ git -C "$wtPath" rev-parse --abbrev-ref HEAD   # kiro/{ISSUE_CODE}
 git -C "$wtPath" status --porcelain            # vazio
 ```
 
+## Copiar skills para a worktree
+
+`.kiro/skills` está no `.gitignore`, então a worktree nasce sem as skills. Imediatamente após criar e verificar a worktree, copie a pasta de skills do workspace principal para que o sub-agente possa usar caminhos relativos à worktree.
+
+```powershell
+$skillsSrc  = Join-Path $repoRoot ".kiro" "skills"
+$skillsDest = Join-Path $wtPath ".kiro" "skills"
+
+if (Test-Path $skillsSrc) {
+    New-Item -ItemType Directory -Path (Join-Path $wtPath ".kiro") -Force | Out-Null
+    Copy-Item -Path $skillsSrc -Destination $skillsDest -Recurse -Force
+}
+```
+
+Verifique a cópia:
+
+```powershell
+Test-Path $skillsDest   # True
+Get-ChildItem $skillsDest -Recurse -Directory | Select-Object FullName
+```
+
+A pasta copiada permanece ignorada pelo git (`.gitignore` já cobre `.kiro/skills`), então não aparecerá no `git status` nem poluirá o diff.
+
 ## Retry de lock (execução paralela)
 
 Worktrees diferentes compartilham o mesmo diretório `.git`. Com N sub-agentes rodando ao mesmo tempo, `worktree add`, `fetch` e `push` podem colidir nos locks. As falhas são transitórias — o certo é esperar e repetir, não abortar.

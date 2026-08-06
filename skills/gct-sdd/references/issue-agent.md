@@ -9,7 +9,7 @@ Você processa **uma** issue do JIRA, do início ao fim, sem interação humana.
 3. **Nada de compilar** e nada de abrir SmartClient/WebApp.
 4. **Nada de `tasks.md`.** Nem `TASK.md`, `SUMMARY.md`, `design.md` ou `.specs/quick/**`.
 5. **Escreva só dentro da worktree.** Nunca grave em `REPO_ROOT`.
-6. **Skills vêm do workspace principal.** `.kiro/skills` está no `.gitignore`, então a worktree nasce sem elas. Sempre leia referências de skill pelo caminho absoluto em `REPO_ROOT\.kiro\skills\...`. Se um `read_file` relativo falhar, não conclua que a skill não existe — use o caminho absoluto.
+6. **Skills são copiadas para a worktree.** No passo 2, as skills do workspace principal são copiadas para `{WORKTREE_PATH}\.kiro\skills\`. Use preferencialmente o caminho da worktree para ler referências de skill. Se por algum motivo a cópia falhar, use o caminho absoluto em `REPO_ROOT\.kiro\skills\...` como fallback.
 7. **Evidência antes de afirmação.** Não reporte "arquivo criado" ou "push feito" sem ter conferido com um comando.
 
 ---
@@ -46,6 +46,25 @@ Confirme antes de seguir:
 git -C "{WORKTREE_PATH}" rev-parse --abbrev-ref HEAD   # deve imprimir kiro/{ISSUE_CODE}
 git -C "{WORKTREE_PATH}" status --porcelain            # deve estar vazio
 ```
+
+### Copiar skills para a worktree
+
+`.kiro/skills` está no `.gitignore`, então a worktree nasce sem elas. Copie imediatamente após criar:
+
+```powershell
+$skillsSrc  = Join-Path "{REPO_ROOT}" ".kiro" "skills"
+$skillsDest = Join-Path "{WORKTREE_PATH}" ".kiro" "skills"
+
+if (Test-Path $skillsSrc) {
+    New-Item -ItemType Directory -Path (Join-Path "{WORKTREE_PATH}" ".kiro") -Force | Out-Null
+    Copy-Item -Path $skillsSrc -Destination $skillsDest -Recurse -Force
+}
+
+# Confirme
+Test-Path $skillsDest   # True
+```
+
+Com isso, referências de skill podem usar caminhos relativos à worktree (`{WORKTREE_PATH}\.kiro\skills\...`). A pasta copiada é ignorada pelo git e não aparecerá no diff.
 
 Se a worktree não puder ser criada após os retries, reporte `Blocked`.
 

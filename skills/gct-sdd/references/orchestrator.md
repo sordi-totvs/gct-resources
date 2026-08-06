@@ -82,15 +82,19 @@ BRANCH: kiro/{ISSUE_CODE}
 PRIMEIRO PASSO OBRIGATORIO: leia o protocolo completo e siga-o a risca:
   {REPO_ROOT}\.kiro\skills\gct-sdd\references\issue-agent.md
 
-Referencias que voce vai precisar (caminhos absolutos do workspace principal —
-a worktree NAO tem .kiro/skills porque esta no .gitignore):
-  {REPO_ROOT}\.kiro\skills\gct-sdd\references\worktree.md
-  {REPO_ROOT}\.kiro\skills\advpl-tlpp-sdd\SKILL.md
-  {REPO_ROOT}\.kiro\skills\advpl-tlpp-sdd\references\bug-spec.md
-  {REPO_ROOT}\.kiro\skills\advpl-tlpp-sdd\references\design.md
-  {REPO_ROOT}\.kiro\skills\advpl-tlpp-root-cause-analysis\SKILL.md
-  {REPO_ROOT}\.kiro\skills\advpl-tlpp-root-cause-analysis\references\rca-template.md
-  {REPO_ROOT}\.kiro\skills\advpl-tlpp-root-cause-analysis\references\defect-patterns.md
+IMPORTANTE: No passo 2, apos criar a worktree, copie .kiro/skills do workspace
+principal para a worktree (ver worktree.md secao "Copiar skills para a worktree").
+Com isso, as referencias de skill ficam disponiveis localmente na worktree:
+  {WORKTREE_PATH}\.kiro\skills\gct-sdd\references\worktree.md
+  {WORKTREE_PATH}\.kiro\skills\advpl-tlpp-sdd\SKILL.md
+  {WORKTREE_PATH}\.kiro\skills\advpl-tlpp-sdd\references\bug-spec.md
+  {WORKTREE_PATH}\.kiro\skills\advpl-tlpp-sdd\references\design.md
+  {WORKTREE_PATH}\.kiro\skills\advpl-tlpp-root-cause-analysis\SKILL.md
+  {WORKTREE_PATH}\.kiro\skills\advpl-tlpp-root-cause-analysis\references\rca-template.md
+  {WORKTREE_PATH}\.kiro\skills\advpl-tlpp-root-cause-analysis\references\defect-patterns.md
+
+Fallback: se a copia falhar, use os caminhos absolutos do workspace principal:
+  {REPO_ROOT}\.kiro\skills\...
 
 RESTRICOES ABSOLUTAS:
 - Modo autonomo total: NUNCA pergunte, NUNCA aguarde aprovacao. Gates de aprovacao

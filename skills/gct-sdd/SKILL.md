@@ -112,7 +112,7 @@ Se o tipo da issue for ambíguo (ex.: Task descrevendo um comportamento errado),
 
 ## Gotchas
 
-- **`.kiro/skills` está no `.gitignore`.** A worktree nasce **sem** as skills. Todo `read_file` de referência de skill deve usar o caminho absoluto do workspace principal (`c:\git\gestao-de-contratos\.kiro\skills\...`), nunca um caminho relativo à worktree. Sem isso o sub-agente conclui que a skill não existe.
+- **`.kiro/skills` está no `.gitignore`.** A worktree nasce sem as skills, mas o passo 2 do sub-agente copia a pasta inteira do workspace principal para a worktree (ver `worktree.md`, seção "Copiar skills para a worktree"). Após a cópia, referências de skill usam caminhos da worktree. Se a cópia falhar, o fallback é usar o caminho absoluto do workspace principal (`REPO_ROOT\.kiro\skills\...`).
 - **`get-jira-issue` aceita só `issue_key`.** O `advpl-tlpp-sdd` menciona `fields` e `expand`; esses parâmetros não existem neste MCP. Passar qualquer outro argumento falha.
 - **`git worktree add` em paralelo pode colidir** nos locks do `.git` compartilhado. Trate `index.lock`/`packed-refs.lock`/`cannot lock ref` como transitório e aplique o retry descrito em [worktree.md](references/worktree.md).
 - **`.specs/` ainda não existe no repositório.** O primeiro sub-agente a rodar cria a árvore. Como cada um escreve em worktree própria e em subpasta própria, não há conflito de merge.
