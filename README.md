@@ -8,6 +8,8 @@ Contém skills do Kiro utilizadas no dia a dia dos times para automação de doc
 
 | Skill | Descrição |
 |---|---|
+| [advpl-tlpp-performance-analysis](skills/advpl-tlpp-performance-analysis/SKILL.md) | Analisa performance de relatórios que migraram do fonte legado (AdvPL/TLPP) para Smart View / TReports, comparando os dois caminhos via LogProfiler e plano de execução para provar o gargalo e propor a correção mínima. |
+| [gct-pr-text](skills/gct-pr-text/SKILL.md) | Redige o texto do Pull Request a partir das alterações da branch atual em relação à master, encerrando com o resumo para check-in no TFS. |
 | [gct-sdd](skills/gct-sdd/SKILL.md) | Orquestra em paralelo a documentação de múltiplas issues do JIRA — cria `bug-spec.md` e `rca.md` em branches isoladas, uma por issue, sem interação humana. |
 | [gct-tests](skills/gct-tests/SKILL.md) | Cria caso de teste de regressão (Kanoah / Adaptavist) e script AdvPR a partir de uma issue do módulo Gestão de Contratos (SIGAGCT). |
 
@@ -15,6 +17,19 @@ Contém skills do Kiro utilizadas no dia a dia dos times para automação de doc
 
 ```
 skills/
+├── advpl-tlpp-performance-analysis/
+│   ├── SKILL.md
+│   ├── references/
+│   │   ├── execution-plan-analysis.md
+│   │   ├── legacy-vs-smartview.md
+│   │   ├── perf-analysis-template.md
+│   │   ├── prerequisites.md
+│   │   ├── profiler-analysis.md
+│   │   └── tlpp-master-rules.md
+│   └── scripts/
+│       └── Parse-FwLogProfiler.ps1
+├── gct-pr-text/
+│   └── SKILL.md
 ├── gct-sdd/
 │   ├── SKILL.md
 │   └── references/
@@ -57,6 +72,8 @@ Após a instalação, acione via chat do Kiro:
 
 - `"rodar gct-sdd DTEXPRO-6805, DTEXPRO-6866"`
 - `"criar caso de teste da issue GCT-1234"`
+- `"redige o texto do PR"`
+- `"analisar performance do relatório Smart View da issue GCT-1234"`
 
 ## Licença
 
