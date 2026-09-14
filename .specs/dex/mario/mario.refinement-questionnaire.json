@@ -1,0 +1,280 @@
+{
+  "schemaVersion": 1,
+  "feature": "mario",
+  "title": "Questionário de Refinamento — Mario",
+  "status": "answered",
+  "questions": [
+    {
+      "id": "1.1",
+      "section": "Escopo e arquitetura da entrega",
+      "text": "O MARIO deve ser entregue como uma única skill orquestradora ou como um conjunto de skills, uma por fase?",
+      "essential": true,
+      "suggestion": "Uma única skill `skills/mario/`, com o fluxo das fases no SKILL.md e um arquivo em references/ por fase (phase-1-business-refinement.md, phase-2-technical-refinement.md, phase-3-coding.md). A skill de análise de fontes citada na fase 1 nasce como references/phase-1-business-refinement.md do próprio MARIO, não como skill separada.",
+      "answer": "Uma única skill `skills/mario/`, com o fluxo das fases no SKILL.md e um arquivo em references/ por fase (phase-1-business-refinement.md, phase-2-technical-refinement.md, phase-3-coding.md). A skill de análise de fontes citada na fase 1 nasce como references/phase-1-business-refinement.md do próprio MARIO, não como skill separada.\nO nosso objetivo é entregar um agente, além da skill. O usuário, ao usar esse agente, saberá que está trabalhando justamente dentro desse fluxo independentemente de quais skills ou tools venham a ser usadas."
+    },
+    {
+      "id": "1.2",
+      "section": "Escopo e arquitetura da entrega",
+      "text": "Qual é a relação do MARIO com a skill gct-sdd, que já produz bug-spec.md e rca.md por issue?",
+      "essential": true,
+      "suggestion": "O MARIO é interativo, trata uma issue por execução e é independente da gct-sdd, que permanece para o processamento em lote. Não delega à gct-sdd: aciona a mesma skill base (advpl-tlpp-sdd) e reaproveita no seu references/ os overrides de caminho e de modo já validados na gct-sdd, trocando o modo autônomo pelos gates de aprovação humana.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "1.3",
+      "section": "Escopo e arquitetura da entrega",
+      "text": "O MARIO é específico do módulo Gestão de Contratos (SIGAGCT) ou agnóstico de módulo Protheus?",
+      "essential": true,
+      "suggestion": "Agnóstico de módulo Protheus. O repositório alvo é o repositório de módulo aberto no workspace, e convenções específicas de módulo (base congelada, prefixos de rotina) continuam residindo nas skills delegadas.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "1.4",
+      "section": "Escopo e arquitetura da entrega",
+      "text": "As fases 4, 5 e 6 fazem parte do escopo executável do MARIO?",
+      "essential": true,
+      "suggestion": "Fases 1 a 3 executáveis pelo MARIO. Fase 5 acionável sob demanda, delegando à skill code-review e entregando o resultado no chat sem publicar comentários. Fases 4 e 6 fora do escopo: o SKILL.md apenas as descreve como responsabilidade humana e lista o que o humano precisa validar.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "1.5",
+      "section": "Escopo e arquitetura da entrega",
+      "text": "Como o agente do MARIO será versionado e distribuído, dado que /.kiro/agents está no .gitignore deste repositório?",
+      "essential": true,
+      "suggestion": "Versionar a definição em `agents/mario.agent.md` na raiz do repositório (formato observado em .kiro/agents/browse-to-smartx-migrator.agent.md) e documentar no README a instalação por cópia para .kiro/agents/ do repositório alvo. Verificado na extensão Dex instalada (sordi.dex-2.5.0): ela instala apenas em .kiro/skills (ou .agents/skills no VS Code) e não trata agentes, portanto a instalação do agente é manual nesta versão. O agente permanece fino: identidade, fluxo das 6 fases e gates, delegando o detalhamento à skill mario.",
+      "answer": "Este projeto cria recursos de IA para serem usados em outros projetos. Hoje o único tipo de recurso é skill, na pasta `skills` da raiz. O agente é um novo tipo de recurso, então ele deve ficar em uma nova pasta chamada `agents`."
+    },
+    {
+      "id": "1.6",
+      "section": "Escopo e arquitetura da entrega",
+      "text": "A incorporação da gct-sdd ao ecossistema do MARIO entra nesta entrega ou fica para depois?",
+      "essential": true,
+      "suggestion": "Depois, em duas etapas. Nesta entrega o MARIO nasce interativo e a gct-sdd continua como está; quando as fases 1 a 3 estiverem estáveis, a gct-sdd é absorvida como modo lote do MARIO (references/modo-lote.md), herdando despacho paralelo, worktree e retry de lock já provados nas suas três references. Para a absorção sair barata, decidir agora: prefixo único de branch (2.6, já respondida com mario/{ISSUE}), pasta única de artefatos (o lote passa a gravar em .specs/mario/{ISSUE}) e nomes de artefato idênticos (3.1). Enquanto a absorção não acontecer, o SKILL.md do MARIO declara quando usar cada uma, para não gerar artefato duplicado da mesma issue em pastas e branches diferentes. Fatos que pesam: a gct-sdd tem \"nunca pergunta\" como regra inviolável, oposta aos gates do MARIO, e cobre apenas a fase 2, sem a fase 1.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "2.1",
+      "section": "Fluxo, estado e aprovação",
+      "text": "Como o gate de aprovação ao final de cada fase deve funcionar?",
+      "essential": true,
+      "suggestion": "Ao concluir uma fase, apresentar no chat resumo, caminhos dos artefatos e pendências, encerrar o turno e aguardar aprovação explícita. Nunca iniciar a fase seguinte no mesmo turno, nem interpretar silêncio ou pedido genérico como aprovação sem confirmar o que foi aprovado.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "2.2",
+      "section": "Fluxo, estado e aprovação",
+      "text": "Como o MARIO reconhece em que fase uma issue está ao ser retomado em outra sessão?",
+      "essential": true,
+      "suggestion": "Manter .specs/mario/{ISSUE}/mario.status.md com fase atual, data, aprovações, decisões de degradação e pendências. Na retomada, ler esse arquivo; na ausência dele, inferir a fase pelos artefatos existentes e declarar a inferência ao usuário antes de agir.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "2.3",
+      "section": "Fluxo, estado e aprovação",
+      "text": "O usuário pode acionar uma fase isolada, sem passar pelas anteriores?",
+      "essential": true,
+      "suggestion": "Sim. Aceitar pedidos como \"rodar a fase 2 da issue X\", validando antes que os artefatos da fase anterior existem e estão aprovados no mario.status.md; se não estiverem, avisar o que falta e pedir confirmação explícita para prosseguir, registrando a decisão.",
+      "answer": "Sim. Aceitar pedidos como \"rodar a fase 2 da issue X\", validando antes que os artefatos da fase anterior existem e estão aprovados no mario.status.md; se não estiverem, avisar o que falta e não prosseguir."
+    },
+    {
+      "id": "2.4",
+      "section": "Fluxo, estado e aprovação",
+      "text": "O que acontece quando a fase 1 concluir que a issue não é um bug?",
+      "essential": true,
+      "suggestion": "O fluxo para. O documento da fase 1 é gravado com a conclusão, as evidências e a nota, e o MARIO reporta ao usuário sugerindo encaminhamentos (devolver ao atendimento, tratar como melhoria, pedir mais informações). A fase 2 só começa com decisão explícita do usuário.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "2.5",
+      "section": "Fluxo, estado e aprovação",
+      "text": "O MARIO deve criar branch e/ou worktree para a issue?",
+      "essential": true,
+      "suggestion": "Uma issue por execução, no diretório de trabalho atual, sem worktree. No início de qualquer fase, se a branch atual não for a branch da issue, o MARIO informa e pergunta se deve criar uma nova branch a partir da base do repositório (origin/master ou origin/main), precedida de git fetch origin. Confirmado, cria e ativa a branch antes de seguir; negado, continua na branch atual. Nunca fazer commit, push ou abrir PR — isso pertence à fase 4, humana. Paralelismo entre issues continua sendo papel da gct-sdd.",
+      "answer": "Uma issue por execução, no diretório de trabalho atual, sem worktree. No início de qualquer parte do fluxo, se a branch atual não for `mario/{ISSUE}`, informar o usuário e perguntar se ele quer criar uma nova branch baseada na master. Se confirmar, criar a branch, ativá-la e só então continuar a tarefa. Se negar, seguir na branch atual — não é impedimento.\nNunca fazer commit, push ou abrir PR (fase 4, humana). Paralelismo entre issues continua sendo papel da gct-sdd."
+    },
+    {
+      "id": "2.6",
+      "section": "Fluxo, estado e aprovação",
+      "text": "Qual é o nome definitivo da branch: kiro/{ISSUE} ou mario/{issue}?",
+      "essential": true,
+      "suggestion": "Usar `mario/{ISSUE}`, com a chave em maiúsculas igual à da pasta de artefatos (3.2), reservando o prefixo kiro/ para as branches da gct-sdd e evitando colisão entre as duas skills na mesma issue.",
+      "answer": "Usar `mario/{ISSUE}`, com a chave em maiúsculas igual à da pasta de artefatos (3.2)."
+    },
+    {
+      "id": "2.7",
+      "section": "Fluxo, estado e aprovação",
+      "text": "Como tratar a árvore de trabalho suja no momento de criar a branch mario/{ISSUE} a partir da master?",
+      "essential": true,
+      "suggestion": "Com a árvore suja, não criar a branch e tratar como impedimento: listar os arquivos pendentes (git status --short), explicar que é preciso árvore limpa para criar a branch a partir da base e parar, sem fazer stash, descartar ou commitar nada. Com a árvore limpa, criar a partir de origin/master (ou origin/main) após git fetch origin, ativar a branch e seguir.",
+      "answer": "Quando a árvore estiver suja, a nova branch `mario/{ISSUE}` não deve ser criada — isso é um impeditivo no fluxo. Se a árvore estiver limpa, a nova branch pode ser criada."
+    },
+    {
+      "id": "2.8",
+      "section": "Fluxo, estado e aprovação",
+      "text": "O impedimento da árvore suja vale também quando o usuário já está na branch mario/{ISSUE}?",
+      "essential": true,
+      "suggestion": "Não. O impedimento pertence ao caminho de criação de branch — já estando em mario/{ISSUE} não há branch a criar. A fase segue normalmente, com os arquivos pendentes listados ao usuário e registrados como pendência no mario.status.md, porque afetam o diff que a fase 3 vai descrever no pr-text.md. Uma leitura estrita travaria a retomada da fase 3 com alterações em andamento, que é situação normal de trabalho.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "3.1",
+      "section": "Artefatos e caminhos",
+      "text": "Quais são os nomes exatos dos artefatos em .specs/mario/{issue}?",
+      "essential": true,
+      "suggestion": "Nomes em inglês em todos os artefatos, preservando exatamente os nomes que a advpl-tlpp-sdd já usa e traduzindo os do MARIO. Criados pela advpl-tlpp-sdd: bug-spec.md e rca.md (fase 2), tasks.md (fase 3) e context.md (fase 2, só quando o Discuss for acionado). Criados pelo MARIO: mario.status.md (controle), business-refinement.md (fase 1), test-case.md e kanoah/{routine}/{CTxxx}.md (fase 2, caminho da resposta da 3.4), technical-doc.md e pr-text.md (fase 3) e side-findings.md (fase 3, só quando houver achados — ver 4.5). Evitei side-issues.md porque \"issue\" já significa a issue do JIRA em todo o projeto. Verificado em .kiro/skills/advpl-tlpp-sdd: no bug track a skill usa exatamente bug-spec.md, rca.md e tasks.md em .specs/fixes/[bug]/, então só a pasta muda; a skill de RCA grava por default em docs/rca/RCA-<rotina>-<AAAA-MM-DD>.md e o Quick mode em .specs/quick/NNN-slug/TASK.md + SUMMARY.md, ambos exigindo override.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "3.2",
+      "section": "Artefatos e caminhos",
+      "text": "Qual é o formato de {issue} no caminho?",
+      "essential": true,
+      "suggestion": "Chave do JIRA em maiúsculas, sem slug descritivo: .specs/mario/DTEXPRO-6805/. Aceitar na entrada chave em minúsculas, ID numérico ou URL do JIRA, normalizando para a chave em maiúsculas.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "3.3",
+      "section": "Artefatos e caminhos",
+      "text": "Como garantir que as skills delegadas gravem em .specs/mario/{issue} em vez de seus caminhos padrão?",
+      "essential": true,
+      "suggestion": "O SKILL.md declara os caminhos como regra inviolável e informa o caminho de destino explícito no prompt de cada delegação, sobrepondo o default. Ao final de cada fase, validar via git status que nenhum artefato de especificação foi criado fora de .specs/mario/{ISSUE} e mover o que estiver fora, avisando o usuário.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "3.4",
+      "section": "Artefatos e caminhos",
+      "text": "O caso de teste (Kanoah) e o script AdvPR também ficam em .specs/mario/{issue}?",
+      "essential": true,
+      "suggestion": "Não. O Kanoah permanece em tests/kanoah/{rotina}/{CTxxx}.md e o script em tests/Scripts AdvPR/Cases/{Rotina}TestCase.PRW, conforme a gct-tests. O test-case.md da fase 2 registra o cenário de regressão aprovado e referencia o caminho real do Kanoah e o nome do método AdvPR.",
+      "answer": "O kanoah fica em .specs/mario/{issue}/kanoah/{rotina}/{CTxxx}.md e o script em tests/Scripts AdvPR/Cases/{Rotina}TestCase.PRW"
+    },
+    {
+      "id": "3.5",
+      "section": "Artefatos e caminhos",
+      "text": "O que fazer com a memória de projeto da advpl-tlpp-sdd (.specs/project/STATE.md, PROJECT.md, ROADMAP.md, .specs/codebase/ e .specs/HANDOFF.md)?",
+      "essential": true,
+      "suggestion": "O MARIO não usa a memória de projeto da skill: nenhum arquivo em .specs/project/, .specs/codebase/ ou .specs/HANDOFF.md é criado ou atualizado. Decisões, bloqueios e pendências ficam no mario.status.md da issue, único registro de estado. Se esses arquivos já existirem no repositório alvo, podem ser lidos como contexto, nunca escritos.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "4.1",
+      "section": "Delegação às skills existentes",
+      "text": "Qual skill produz bug-spec.md, rca.md e tasks.md?",
+      "essential": true,
+      "suggestion": "O MARIO aciona a advpl-tlpp-sdd no bug track para os três artefatos e proíbe o Quick mode e qualquer auto-sizing que pule RCA ou tasks — bug-spec.md, rca.md e tasks.md são sempre produzidos. A advpl-tlpp-root-cause-analysis continua sendo usada, mas por dentro do bug track da advpl-tlpp-sdd, não em chamada direta do MARIO.",
+      "answer": "obrigatoriamente com a skill `advpl-tlpp-sdd`."
+    },
+    {
+      "id": "4.2",
+      "section": "Delegação às skills existentes",
+      "text": "O documento técnico deve ser publicado no TDN/Confluence ou apenas gravado como .md?",
+      "essential": true,
+      "suggestion": "Usar a tdn-technical-doc-writer somente até a montagem do conteúdo e gravar technical-doc.md em .specs/mario/{ISSUE}. Não publicar no Confluence: a publicação é decisão humana da fase 4. O documento deve indicar que está pronto para publicação e qual template segue.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "4.3",
+      "section": "Delegação às skills existentes",
+      "text": "Como resolver o conflito com a gct-pr-text, que proíbe gravar o texto do PR em arquivo?",
+      "essential": true,
+      "suggestion": "Acionar a gct-pr-text com o pedido explícito de gravação e salvar o resultado em .specs/mario/{ISSUE}/pr-text.md, preservando a seção TEXTO PARA CHECK-IN NO TFS. O texto também é apresentado no chat no encerramento da fase 3.",
+      "answer": "Acionar a gct-pr-text com o pedido explícito de gravação e salvar o resultado em .specs/mario/{ISSUE}/pr-text.md, preservando a seção TEXTO PARA CHECK-IN NO TFS. O texto também é apresentado no chat no encerramento da fase 3. Ajustes podem ser feitos na skill gct-pr-text se necessário."
+    },
+    {
+      "id": "4.4",
+      "section": "Delegação às skills existentes",
+      "text": "Na fase 3, o MARIO deve converter encoding e compilar os fontes alterados?",
+      "essential": true,
+      "suggestion": "Alterar o mínimo necessário; converter todo fonte tocado com utf8-to-cp1252-conversion; oferecer a compilação via advpl-tlpp-compile e executá-la somente após confirmação do usuário, corrigindo até zero erros. Sem compilação confirmada, registrar a pendência no pr-text.md e no mario.status.md.",
+      "answer": "Por enquanto, o MARIO não vai compilar ou executar. Vamos implementar isso em outro momento."
+    },
+    {
+      "id": "4.5",
+      "section": "Delegação às skills existentes",
+      "text": "Onde registrar os problemas colaterais encontrados durante a fase 3?",
+      "essential": false,
+      "suggestion": "Criar .specs/mario/{ISSUE}/side-findings.md apenas quando houver achados, com um item por problema (fonte, função, sintoma, risco de não corrigir, esforço estimado), e listá-los no resumo de encerramento da fase 3. Nenhum é corrigido sem aprovação explícita.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "4.6",
+      "section": "Delegação às skills existentes",
+      "text": "Qual skill produz o documento de caso de teste de regressão da fase 2?",
+      "essential": true,
+      "suggestion": "gct-tests no modo \"apenas Kanoah\" para o caso de teste da fase 2 e para o script AdvPR da fase 3. A kanoah-advpr-generator é acionada apenas quando o usuário pedir o XML de importação no Zephyr.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "4.7",
+      "section": "Delegação às skills existentes",
+      "text": "Como as fases do MARIO se mapeiam nas fases da advpl-tlpp-sdd e onde ficam os gates?",
+      "essential": true,
+      "suggestion": "Acionar a advpl-tlpp-sdd por fase, nunca de ponta a ponta: Specify e Design na fase 2 do MARIO (bug-spec.md + rca.md), Tasks no início da fase 3 (tasks.md). Os gates internos da advpl-tlpp-sdd entre Specify, Design e Tasks são suprimidos — valem os gates do MARIO. Premissas que a skill pediria para aprovar ficam registradas no próprio documento, no padrão que a gct-sdd já usa.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "4.8",
+      "section": "Delegação às skills existentes",
+      "text": "A fase Execute da advpl-tlpp-sdd conduz a codificação da fase 3?",
+      "essential": true,
+      "suggestion": "Sim, usar o Execute da advpl-tlpp-sdd para executar as tasks, mantendo commit atômico desabilitado (o MARIO não commita) e a regra de alteração mínima. O MARIO permanece responsável pelos artefatos que o Execute não cobre: script AdvPR, technical-doc.md, pr-text.md e side-findings.md.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "4.9",
+      "section": "Delegação às skills existentes",
+      "text": "Sem compilar nem executar (4.4), a conversão para CP1252 continua na fase 3?",
+      "essential": true,
+      "suggestion": "Manter a conversão: todo fonte tocado na fase 3 é convertido com utf8-to-cp1252-conversion. A advpl-tlpp-sdd declara que fonte AdvPL/TLPP gerado por IA nasce em UTF-8 e que o compilador RDMake/AppServer exige CP-1252 — sem a conversão, o humano que compila na fase 4 recebe o fonte em UTF-8, com risco de acentuação corrompida. \"Não executar\" significa não acionar advpl-tlpp-compile, não abrir o SmartClient e não rodar testes: o passo do Execute que pergunta sobre compilação é suprimido, e a fase Execute em si permanece, conforme a 4.8. Registrar no mario.status.md e no pr-text.md que o fonte não foi compilado nem executado.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "5.1",
+      "section": "Nota de confiabilidade da fase 1",
+      "text": "Quais são os critérios da nota de 0 a 10?",
+      "essential": true,
+      "suggestion": "Cinco dimensões de 0 a 2 pontos cada, somando 10, com pontuação por dimensão registrada no documento: reprodutibilidade da jornada; comportamento atual localizado no fonte e função exatos; respaldo do comportamento esperado (TDN, norma, lei ou padrão de mercado); qualidade das informações da issue e do ticket; ausência de premissas não confirmadas.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "5.2",
+      "section": "Nota de confiabilidade da fase 1",
+      "text": "A nota funciona como gate para a fase 2?",
+      "essential": true,
+      "suggestion": "A nota não bloqueia automaticamente. Com nota menor que 6, listar as lacunas que a derrubaram, recomendar o que buscar e exigir decisão explícita do usuário antes de iniciar a fase 2. Com nota 6 ou mais, vale o gate normal de aprovação da fase.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "5.3",
+      "section": "Nota de confiabilidade da fase 1",
+      "text": "Quais fontes de informação a fase 1 deve consultar obrigatoriamente?",
+      "essential": true,
+      "suggestion": "Issue do JIRA via get-jira-issue (incluindo o bloco Zendesk e, quando houver, include_zendesk_attachments); código do repositório alvo; TDN e documentação de produto via product-docs-search e language-system-docs-search; legislation-docs-search quando o comportamento esperado depender de norma, lei ou obrigação fiscal; changesets da issue quando existirem. Fonte indisponível deve ser registrada e refletida na nota.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "6.1",
+      "section": "Pré-requisitos e degradação",
+      "text": "Como verificar se o MCP advpl-tlpp-mcp-docs está disponível?",
+      "essential": true,
+      "suggestion": "No preflight, executar uma chamada real e barata ao MCP (por exemplo language-system-docs-search com limit 1). Se a tool não existir ou a chamada falhar, exibir o aviso de impacto na qualidade, perguntar se deve continuar e registrar a resposta no mario.status.md, repetindo o aviso no encerramento de cada fase executada em modo degradado.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "6.2",
+      "section": "Pré-requisitos e degradação",
+      "text": "Como verificar a presença das skills pré-requisito?",
+      "essential": true,
+      "suggestion": "Verificar a existência de .kiro/skills/{skill}/SKILL.md no workspace e, como fallback, no diretório de skills do usuário. Faltando qualquer uma das quatro skills bloqueantes, abortar antes de criar qualquer artefato, listar as ausentes e instruir a instalação pela extensão Dex.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "6.3",
+      "section": "Pré-requisitos e degradação",
+      "text": "A gct-tests e a gct-pr-text entram na lista de pré-requisitos bloqueantes?",
+      "essential": true,
+      "suggestion": "Tratá-las como pré-requisitos não bloqueantes. Sem a gct-tests, usar advpr-test-generator e kanoah-advpr-generator avisando a degradação; sem a gct-pr-text, redigir o texto do PR pelo próprio fluxo, mantendo a seção de check-in do TFS. A lista bloqueante permanece com as quatro skills do briefing.",
+      "answer": "Sim, entram na lista de pré-requisitos bloqueantes."
+    }
+  ]
+}
