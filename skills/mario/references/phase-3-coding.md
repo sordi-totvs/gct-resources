@@ -36,7 +36,18 @@ NÃO use .specs/fixes/.
 
 As tasks cobrem a correção mínima, o teste de regressão e a prevenção apontada
 pelo RCA. Não abra gate ao final: o gate é do MARIO, ao fim da fase 3.
+
+Regras do repositório que PREVALECEM sobre os defaults desta skill
+(extraídas das steerings em .kiro/steering/, ver mario.status.md):
+- {regra concreta 1} (fonte: {arquivo da steering})
+- {regra concreta 2} (fonte: {arquivo da steering})
+Onde estas regras conflitarem com o comportamento padrão da skill, siga as regras acima.
 ```
+
+Antes de montar o prompt, releia a seção "Steerings aplicáveis" do
+`mario.status.md` e selecione as regras que afetam o código (tipagem, encoding,
+includes, padrões AdvPL/TLPP, proibições). Monte o bloco **dinamicamente** — não
+crave a regra aqui. Sem regra de código aplicável, omita o bloco.
 
 ## 2. Execute da `advpl-tlpp-sdd`
 
@@ -62,6 +73,11 @@ Regras que valem acima de qualquer sugestão da skill delegada:
 - Nenhuma API, classe, método, tabela, campo ou parâmetro do Protheus é usado por
   memória. Confirme no código do repositório alvo ou nas fontes de verdade (MCP
   `advpl-tlpp-mcp-docs`, documentação oficial) antes de escrever a linha.
+- **Regras de código do repositório prevalecem.** As regras de tipagem, encoding,
+  includes e padrões AdvPL/TLPP levantadas no preflight (seção "Steerings
+  aplicáveis" do `mario.status.md`) ganham do default da skill. Repasse-as no
+  prompt do Execute, citando a steering de origem, e siga-as onde divergirem do
+  comportamento padrão da skill.
 
 Artefatos que o Execute não cobre e permanecem com o MARIO: script AdvPR,
 `technical-doc.md`, `pr-text.md` e `side-findings.md`.
@@ -101,7 +117,19 @@ Implemente o método em tests/Scripts AdvPR/Cases/{Rotina}TestCase.PRW do
 repositório alvo — este é o único artefato desta fase fora de .specs/mario/.
 
 Não compile e não execute o teste.
+
+Regras do repositório que PREVALECEM sobre os defaults desta skill
+(extraídas das steerings em .kiro/steering/, ver mario.status.md):
+- {regra concreta 1} (fonte: {arquivo da steering})
+- {regra concreta 2} (fonte: {arquivo da steering})
+Onde estas regras conflitarem com o comportamento padrão da skill, siga as regras acima.
 ```
+
+Antes de montar o prompt, releia a seção "Steerings aplicáveis" do
+`mario.status.md` e selecione as regras de numeração/nomenclatura de teste (a mesma
+steering `fileMatch` que orientou o CT na fase 2). Monte o bloco
+**dinamicamente**, garantindo que o método criado seja coerente com o código do CT
+já definido na fase 2.
 
 Confirme, no `test-case.md`, o nome real do método criado — na fase 2 ele era
 previsão.
@@ -121,7 +149,25 @@ A publicação é decisão humana da fase 4.
 
 Entregue o conteúdo campo a campo, como seria publicado, para gravação em
 .specs/mario/{ISSUE}/technical-doc.md.
+
+Regras do repositório que PREVALECEM sobre os defaults desta skill
+(extraídas das steerings em .kiro/steering/, ver mario.status.md):
+- {convenção de DT concreta 1} (fonte: {arquivo da steering})
+- {convenção de DT concreta 2} (fonte: {arquivo da steering})
+Onde estas regras conflitarem com o comportamento padrão da skill, siga as regras acima.
 ```
+
+Antes de montar o prompt, releia a seção "Steerings aplicáveis" do
+`mario.status.md` e selecione as convenções de DT do projeto que se aplicam ao caso
+(página pai/`ancestor_id` por projeto e tipo de issue, release e rótulos de versão,
+autoria, texto proibido). Monte o bloco **dinamicamente**, citando a steering de
+origem — não crave o valor aqui.
+
+**Consequência.** Quando a convenção do projeto **determina** o `ancestor_id` e a
+release, o `technical-doc.md` **não** registra essas informações como pendência a
+perguntar ao usuário: traz o valor já resolvido pela convenção. Só vira pendência a
+perguntar aquilo que a própria steering mandar perguntar. Onde a steering declarar
+que prevalece sobre a `tdn-technical-doc-writer`, honre isso no prompt.
 
 Sobre a auditoria: a `tdn-technical-doc-writer` audita o conteúdo com a
 `tdn-technical-doc-review` em modo pré-publicação antes de apresentá-lo. Mantenha
@@ -134,7 +180,12 @@ O `technical-doc.md` declara no topo:
 - qual template segue (`Documento Técnico (New)`, salvo indicação diferente da
   própria skill);
 - que está **pronto para publicação** e que a publicação não foi feita;
-- que falta o `ancestor_id` da página pai, que só o usuário informa.
+- o `ancestor_id` da página pai: quando uma steering aplicável fixa o valor por
+  projeto e tipo de issue, o documento traz o `ancestor_id` **já resolvido pela
+  convenção**, citando a steering de origem; só quando **nenhuma** steering resolve
+  o valor é que o documento o marca como pendência a perguntar ao usuário. O mesmo
+  vale para a release/rótulos de versão fixados por convenção — resolvidos não são
+  lacuna.
 
 Como os changesets ainda não existem (nada foi commitado), o documento descreve a
 correção a partir do `rca.md`, do `tasks.md` e do diff local.
@@ -202,7 +253,11 @@ Confirme:
 - nenhum arquivo em `.specs/fixes/`, `.specs/quick/`, `docs/rca/` ou
   `tests/kanoah/`;
 - nenhum commit criado (`git log --oneline -3` no mesmo ponto de antes);
-- todo fonte AdvPL/TLPP tocado foi convertido para CP-1252.
+- todo fonte AdvPL/TLPP tocado foi convertido para CP-1252;
+- o `technical-doc.md`, o `pr-text.md` e o fonte respeitam as steerings aplicáveis
+  registradas no `mario.status.md` — em especial, o `technical-doc.md` traz o
+  `ancestor_id` e a release resolvidos pela convenção quando ela existir, sem
+  marcá-los como pendência.
 
 ---
 

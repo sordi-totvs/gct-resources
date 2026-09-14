@@ -121,6 +121,26 @@ criar o script agora, a resposta é não — e, por isso, NÃO marque o caso de 
 como Test Type: Manual, porque a automação está prevista.
 ```
 
+3. **Regras do repositório que prevalecem.** Antes de montar o prompt, releia a
+   seção "Steerings aplicáveis" do `mario.status.md` e selecione as regras que
+   afetam o caso de teste (numeração, nomenclatura, estrutura). Inclua no prompt um
+   bloco final, montado **dinamicamente** a partir do que o preflight levantou — não
+   crave a regra aqui:
+
+```
+Regras do repositório que PREVALECEM sobre os defaults desta skill
+(extraídas das steerings em .kiro/steering/, ver mario.status.md):
+- {regra concreta 1} (fonte: {arquivo da steering})
+- {regra concreta 2} (fonte: {arquivo da steering})
+Onde estas regras conflitarem com o comportamento padrão da skill, siga as regras acima.
+```
+
+Atenção ao momento: uma regra de numeração/nomenclatura de teste costuma morar numa
+steering `fileMatch` que só casaria com o script AdvPR na fase 3. Mas o código do CT
+é decidido **agora**, na fase 2, no `test-case.md` e no Kanoah. **É obrigação da
+fase 2** aplicar essa regra já ao definir o código do CT, sob pena de o CT nascer
+com numeração incompatível e só ser corrigido depois.
+
 Respeite a porta de antiduplicidade da skill. Se já existe Kanoah para o CT, para
 o método do script ou citando a issue, informe o usuário e **não sobrescreva** —
 decida com ele entre reaproveitar o caso existente ou criar um novo cenário.
@@ -178,6 +198,10 @@ prováveis nesta fase:
 Encontrando artefato fora, mova para o caminho correto, remova a pasta vazia que
 sobrou e avise o usuário. Confirme também que **nenhum fonte** AdvPL/TLPP foi
 alterado: a fase 2 não escreve código.
+
+Confirme ainda que a numeração e a nomenclatura do CT criado obedecem às steerings
+aplicáveis registradas no `mario.status.md`. Encontrando divergência, corrija o
+código do CT no `test-case.md` e no Kanoah antes do gate.
 
 ---
 
