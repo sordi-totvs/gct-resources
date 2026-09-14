@@ -59,3 +59,11 @@ As datas das versões publicadas usam o formato mensal `YYYY-MM`.
   sobre os defaults delas. A declaração do `ancestor_id` no `technical-doc.md`
   passou a ser condicional: resolvido pela convenção quando uma steering o fixa, só
   pendência quando nenhuma steering resolve o valor.
+
+### Corrigido
+
+- Agente MARIO Agent (`mario.agent.md` e `mario.json`) não enxergava as ferramentas
+  do MCP `advpl-tlpp-mcp-docs`, embora o servidor funcione no agente default. Como
+  agente customizado, ele não herda os servidores do `mcp.json` sem declaração
+  explícita. Adicionados os campos `includeMcpJson: true`, `tools: ["*"]` e
+  `allowedTools: ["@advpl-tlpp-mcp-docs"]` em ambos os formatos, mantendo a paridade.
