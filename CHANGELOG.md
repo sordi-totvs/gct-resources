@@ -32,6 +32,11 @@ As datas das versões publicadas usam o formato mensal `YYYY-MM`.
   `mario.agent.md` (identidade, fluxo das 6 fases e gates). A instalação é manual,
   por cópia para `.kiro/agents/` do repositório alvo, porque a extensão Dex
   sincroniza somente a pasta `skills`.
+- `agents/mario.json` — versão em JSON do agente MARIO Agent, formato exigido pelo
+  Kiro, equivalente ao `mario.agent.md` (campos `name` e `description` mais o corpo
+  Markdown no campo `prompt`).
+- Steering `mario-agent-sync` (em `.kiro/steering/`) instruindo a manter
+  `mario.agent.md` e `mario.json` sempre sincronizados na mesma tarefa.
 - Documento `docs/protheus-ia.excalidraw` com o fluxo de uso do Dex.
 
 ### Modificado
@@ -43,3 +48,6 @@ As datas das versões publicadas usam o formato mensal `YYYY-MM`.
 - Skill `gct-pr-text` (1.1.0): a gravação do texto do PR em arquivo, quando pedida
   explicitamente, deixa de ser contrariada pela tabela de escopo e pelo checklist
   final — o arquivo passa a ser adicional à entrega no chat, não substituto dela.
+- Agente renomeado de `MARIO` para `MARIO Agent` no `mario.agent.md` e no
+  `mario.json`, para que o agente tenha nome distinto da skill `mario`. `README.md`
+  atualizado (catálogo de agentes, árvore de estrutura e instalação).
