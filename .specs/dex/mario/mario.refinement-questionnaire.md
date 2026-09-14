@@ -24,7 +24,6 @@ separada.
 
 Resposta: Uma única skill `skills/mario/`, com o fluxo das fases no SKILL.md e um arquivo em references/ por fase (phase-1-business-refinement.md, phase-2-technical-refinement.md, phase-3-coding.md). A skill de análise de fontes citada na fase 1 nasce como references/phase-1-business-refinement.md do próprio MARIO, não como skill separada.
 O nosso objetivo é entregar um agente, além da skill. O usuário, ao usar esse agente, saberá que está trabalhando justamente dentro desse fluxo independentemente de quais skills ou tools venham a ser usadas.
-O nosso objetivo é entregar um agente, além da skill. O usuário, ao usar esse agente, saberá que está trabalhando justamente dentro desse fluxo independentemente de quais skills ou tools venham a ser usadas.
 
 ### 1.2 Qual é a relação do MARIO com a skill `gct-sdd`, que já produz `bug-spec.md` e `rca.md` por issue? — **Essencial**
 
@@ -154,7 +153,6 @@ atual. Nunca faz commit, push nem abre pull request — isso pertence à fase 4,
 é humana. Paralelismo entre issues continua sendo papel da `gct-sdd`.
 
 Resposta: Uma issue por execução, no diretório de trabalho atual, sem worktree. No início de qualquer parte do fluxo, se a branch atual não for `mario/{ISSUE}`, informar o usuário e perguntar se ele quer criar uma nova branch baseada na master. Se confirmar, criar a branch, ativá-la e só então continuar a tarefa. Se negar, seguir na branch atual — não é impedimento.
-Nunca fazer commit, push ou abrir PR (fase 4, humana). Paralelismo entre issues continua sendo papel da gct-sdd.
 Nunca fazer commit, push ou abrir PR (fase 4, humana). Paralelismo entre issues continua sendo papel da gct-sdd.
 
 ### 2.6 Qual é o nome definitivo da branch: `kiro/{ISSUE}` ou `mario/{issue}`? — **Essencial**
