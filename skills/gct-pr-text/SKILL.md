@@ -18,7 +18,7 @@ metadata:
   domain: Protheus
   module: SIGAGCT - Gestão de Contratos
   maintainer: Engenharia Protheus - Gestão de Contratos
-  version: 1.0.0
+  version: 1.1.0
   category: Documentation / Delivery
 ---
 
@@ -39,9 +39,11 @@ Transforma o diff da branch atual em dois entregáveis de entrega: o **texto do 
 |---|---|
 | **Entrada** | Nenhuma obrigatória. A skill trabalha sobre a branch atual do workspace. Opcionalmente o usuário informa o código da issue. |
 | **Saída** | Um único bloco de texto no **chat**, em markdown, contendo o texto do PR e, no final, a seção `TEXTO PARA CHECK-IN NO TFS`. |
-| **Não faz** | Não cria arquivo `.md` no repositório, não faz commit, não faz push, não abre o PR. |
+| **Não faz** | Não faz commit, não faz push, não abre o PR. Não cria arquivo `.md` no repositório, salvo pedido explícito de gravação. |
 
 Regra de ouro: **a entrega é conversacional**. Nunca gravar o texto do PR em arquivo, a não ser que o usuário peça explicitamente.
+
+Havendo pedido explícito, grave no caminho que o usuário informar, preserve a seção `TEXTO PARA CHECK-IN NO TFS` no arquivo e **apresente o texto no chat também** — o arquivo é adicional à entrega conversacional, não substituto dela.
 
 ---
 
@@ -298,4 +300,4 @@ Nada além disso. Sem repetir o conteúdo do PR em prosa fora do bloco.
 - [ ] Nenhuma afirmação de teste, compilação ou validação sem evidência.
 - [ ] A seção `TEXTO PARA CHECK-IN NO TFS` está presente, em bloco de código, sem crase e sem markdown.
 - [ ] O ID da task está no formato `{sub-tarefa}\{issue principal}`, com `Não identificado` no que não foi resolvido.
-- [ ] Nenhum arquivo foi criado no repositório.
+- [ ] Nenhum arquivo foi criado no repositório — exceto quando houve pedido explícito de gravação, caso em que o arquivo está no caminho pedido e o texto também foi apresentado no chat.
