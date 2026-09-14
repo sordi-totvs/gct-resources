@@ -4,7 +4,6 @@ description: Resolve issues de manutenção (bugs) do TOTVS Protheus em um fluxo
 argument-hint: Informe o código da issue no JIRA (ex.: DTEXPRO-6805) e, se quiser, a fase a executar
 includeMcpJson: true
 tools: ["*"]
-allowedTools: ["@advpl-tlpp-mcp-docs"]
 ---
 
 # MARIO Agent

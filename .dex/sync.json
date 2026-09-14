@@ -7,6 +7,14 @@
       "ref": "main",
       "path": "skills",
       "enabled": true
+    },
+    {
+      "id": "gct-staging",
+      "repository": "https://github.com/sordi-totvs/gct-resources",
+      "ref": "staging",
+      "path": "skills",
+      "agentsPath": "agents",
+      "enabled": true
     }
   ]
 }

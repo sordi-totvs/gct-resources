@@ -65,5 +65,7 @@ As datas das versões publicadas usam o formato mensal `YYYY-MM`.
 - Agente MARIO Agent (`mario.agent.md` e `mario.json`) não enxergava as ferramentas
   do MCP `advpl-tlpp-mcp-docs`, embora o servidor funcione no agente default. Como
   agente customizado, ele não herda os servidores do `mcp.json` sem declaração
-  explícita. Adicionados os campos `includeMcpJson: true`, `tools: ["*"]` e
-  `allowedTools: ["@advpl-tlpp-mcp-docs"]` em ambos os formatos, mantendo a paridade.
+  explícita. Adicionados os campos `includeMcpJson: true` e `tools: ["*"]` em ambos
+  os formatos, mantendo a paridade. O auto-aprovar das tools do MCP continua vindo do
+  bloco `autoApprove` do `mcp.json`, sem `allowedTools` no agente — esse campo fazia o
+  Kiro deixar de listar o agente no IDE.
