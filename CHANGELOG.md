@@ -23,9 +23,23 @@ As datas das versões publicadas usam o formato mensal `YYYY-MM`.
   plano de execução da query do objeto de negócio.
 - Skill `gct-pr-text` — redige o texto do Pull Request a partir das alterações da
   branch atual em relação à master, incluindo o resumo para check-in no TFS.
+- Skill `mario` — conduz a resolução de uma issue de manutenção (bug) do Protheus em
+  6 fases, executando refinamento de negócio, refinamento técnico e codificação com
+  aprovação humana ao final de cada fase, gravando todos os artefatos em
+  `.specs/mario/{ISSUE}` e delegando às skills `advpl-tlpp-sdd`, `gct-tests`,
+  `tdn-technical-doc-writer` e `gct-pr-text`.
+- Pasta `agents/` na raiz, novo tipo de recurso do repositório, com o agente
+  `mario.agent.md` (identidade, fluxo das 6 fases e gates). A instalação é manual,
+  por cópia para `.kiro/agents/` do repositório alvo, porque a extensão Dex
+  sincroniza somente a pasta `skills`.
 - Documento `docs/protheus-ia.excalidraw` com o fluxo de uso do Dex.
 
 ### Modificado
 
 - `README.md`: catálogo de skills e árvore de estrutura atualizados para incluir
   `advpl-tlpp-performance-analysis` e `gct-pr-text`.
+- `README.md`: seção de agentes, skill `mario` no catálogo, pasta `agents/` na árvore
+  de estrutura e instruções de instalação do agente.
+- Skill `gct-pr-text` (1.1.0): a gravação do texto do PR em arquivo, quando pedida
+  explicitamente, deixa de ser contrariada pela tabela de escopo e pelo checklist
+  final — o arquivo passa a ser adicional à entrega no chat, não substituto dela.
