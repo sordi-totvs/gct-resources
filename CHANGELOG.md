@@ -51,11 +51,3 @@ As datas das versões publicadas usam o formato mensal `YYYY-MM`.
 - Agente renomeado de `MARIO` para `MARIO Agent` no `mario.agent.md` e no
   `mario.json`, para que o agente tenha nome distinto da skill `mario`. `README.md`
   atualizado (catálogo de agentes, árvore de estrutura e instalação).
-- Skill `mario` (1.1.0): passa a ler as steerings do repositório alvo
-  (`.kiro/steering/*.md`) no preflight, classificá-las por `inclusion` (antecipando
-  as `fileMatch`), extrair as regras concretas para a nova seção "Steerings
-  aplicáveis" do `mario.status.md` e repassá-las às skills delegadas (`gct-tests`,
-  `advpl-tlpp-sdd`, `tdn-technical-doc-writer`) em bloco de regras que prevalece
-  sobre os defaults delas. A declaração do `ancestor_id` no `technical-doc.md`
-  passou a ser condicional: resolvido pela convenção quando uma steering o fixa, só
-  pendência quando nenhuma steering resolve o valor.

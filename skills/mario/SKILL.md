@@ -19,7 +19,7 @@ metadata:
   domain: Protheus
   maintainer: Engenharia Protheus - Gestão de Contratos / Gestão de Receitas
   author: guilherme.sordi@totvs.com.br
-  version: 1.1.0
+  version: 1.0.0
   category: Maintenance / Spec-Driven Development
   depends-on: advpl-tlpp-sdd, advpl-tlpp-root-cause-analysis, kanoah-advpr-generator, tdn-technical-doc-writer, gct-tests, gct-pr-text
 ---
@@ -100,47 +100,6 @@ Skills usadas mas **não** bloqueantes: `utf8-to-cp1252-conversion` (fase 3),
 `code-review` (fase 5) e `tdn-technical-doc-review` (auditoria interna da
 `tdn-technical-doc-writer`). Na ausência delas, avise a degradação e siga.
 
-### 3. Steerings aplicáveis
-
-As skills delegadas operam pelos defaults genéricos delas. As regras específicas
-do repositório alvo vivem em `.kiro/steering/*.md`, e é o MARIO quem precisa
-levá-las até cada delegação — as skills não as enxergam sozinhas. Levante-as aqui,
-no preflight, para não descobri-las tarde demais.
-
-1. **Liste** os arquivos de `.kiro/steering/` do repositório alvo. Se o diretório
-   não existir ou a leitura falhar, **não é erro e não aborta**: registre "sem
-   steerings" no `mario.status.md`, avise que a aderência a convenções específicas
-   do projeto não pôde ser garantida automaticamente, e siga.
-2. **Classifique** cada steering pelo `inclusion` do front matter:
-   - `inclusion: auto` ou `inclusion: always` → sempre aplicável;
-   - `inclusion: fileMatch` com `fileMatchPattern` → aplicável quando o fluxo do
-     MARIO tocar arquivos que casam com o padrão. **Identifique-a já aqui**, mesmo
-     que o arquivo-alvo só vá ser tocado numa fase posterior;
-   - `inclusion: manual` → só quando explicitamente acionada; não repasse por
-     padrão.
-3. **Extraia** de cada steering aplicável as regras concretas que afetam os
-   artefatos do MARIO e mapeie a **fase e a delegação** em que cada uma morde.
-   O que procurar (exemplos genéricos, não lista fechada):
-   - **numeração/nomenclatura de casos de teste** → fase 2 (`test-case.md` e
-     Kanoah) e fase 3 (script AdvPR);
-   - **convenção de DT/TDN** (página pai/`ancestor_id`, release/rótulos de versão,
-     autoria, texto proibido) → fase 3 (`technical-doc.md`);
-   - **tipagem, encoding, includes, padrões de código** → fase 3 (Execute);
-   - **mensagem de commit / texto de PR** → fase 3 (`pr-text.md`).
-4. **Registre** o resultado na seção "Steerings aplicáveis" do `mario.status.md`
-   (ver "Estado e gates"), para o mapeamento sobreviver à retomada em outra sessão
-   e alimentar os prompts de delegação de cada fase.
-
-O objetivo é **antecipar**: uma regra de steering `fileMatch` precisa ser conhecida
-na fase em que o artefato é **decidido**, não só na fase em que o arquivo é
-**escrito**. Exemplo do mecanismo: a regra de faixa de numeração de teste unitário
-mora numa steering `fileMatch` que só casaria com o script AdvPR na fase 3, mas o
-código do CT é decidido na fase 2 — então a regra tem de estar levantada antes.
-
-O MARIO **não copia a steering inteira** para o status nem para os prompts: extrai
-as regras concretas e cita a steering de origem pelo nome do arquivo, para
-rastreabilidade.
-
 ---
 
 ## Branch de trabalho
@@ -194,14 +153,6 @@ ao final de cada uma.
 
 | Item | Impacto | Aberta desde |
 | --- | --- | --- |
-
-## Steerings aplicáveis
-
-Preenchida no preflight e relida na retomada; cada linha vira insumo dos prompts
-de delegação da fase correspondente.
-
-| Steering | Inclusão | Regra concreta | Fase / delegação onde se aplica |
-| --- | --- | --- | --- |
 ```
 
 Na retomada, leia este arquivo antes de agir. Na ausência dele, infira a fase
@@ -270,17 +221,6 @@ contexto, nunca escritos.
 
 Cada skill delegada tem caminho default próprio. Informe o destino explícito no
 prompt de cada delegação — o default nunca prevalece.
-
-Quando uma regra de steering do repositório (levantada no preflight) diverge do
-comportamento padrão da skill delegada, vale esta ordem de precedência:
-
-1. Steering específica do repositório (`.kiro/steering/*.md`) — prevalece.
-2. Regra do próprio MARIO (`SKILL.md` e references).
-3. Default da skill delegada.
-
-Onde uma steering declarar explicitamente que "prevalece sobre a skill X", o MARIO
-honra isso no prompt de delegação, repassando a regra e dizendo que ela ganha do
-default da skill.
 
 | Skill | Default dela | Destino no MARIO |
 | --- | --- | --- |
@@ -375,9 +315,8 @@ para `.specs/mario/{ISSUE}/`) ou recomeçar.
 
 ## Checklist de encerramento de fase
 
-- [ ] Preflight executado; modo degradado e steerings aplicáveis registrados, se houver.
+- [ ] Preflight executado; modo degradado registrado, se houver.
 - [ ] Branch conferida e o desfecho aplicado.
-- [ ] Regras das steerings aplicáveis a esta fase foram repassadas às delegações e conferidas nos artefatos produzidos.
 - [ ] Todos os artefatos da fase existem em `.specs/mario/{ISSUE}/`.
 - [ ] `git status --short` sem artefato de especificação fora da pasta da issue.
 - [ ] Nenhum commit, push, PR, compilação, execução ou publicação aconteceu.
