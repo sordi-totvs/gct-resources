@@ -23,10 +23,14 @@ forma original.
 ## Estrutura do repositório
 
 ```
-skills/<nome-da-skill>/
-├── SKILL.md          # obrigatório — frontmatter + corpo da skill
-├── references/*.md   # opcional — conteúdo carregado sob demanda
-└── scripts/*         # opcional — scripts determinísticos de apoio
+ai-resources/
+├── skills/<nome-da-skill>/
+│   ├── SKILL.md          # obrigatório — frontmatter + corpo da skill
+│   ├── references/*.md   # opcional — conteúdo carregado sob demanda
+│   └── scripts/*         # opcional — scripts determinísticos de apoio
+└── agents/
+    ├── <nome>.agent.md   # frontmatter YAML + corpo em Markdown
+    └── <nome>.json       # formato JSON equivalente do agente
 docs/                 # diagramas e material de apoio
 .specs/dex/           # uso exclusivo das skills dex-spec-manage / dex-spec-plan
 .dex/sync.json        # fontes de skills sincronizadas pela extensão Dex
