@@ -18,14 +18,13 @@ Contém recursos de IA utilizados no dia a dia dos times para automação de doc
 
 | Agente | Descrição |
 |---|---|
-| [MARIO Agent](agents/mario.agent.md) | Identidade e fluxo do MARIO: as 6 fases, os gates de aprovação e os pré-requisitos. O detalhamento vive na skill `mario`. Disponível em dois formatos equivalentes: `mario.agent.md` (Markdown) e `mario.json` (JSON). |
+| [mario](agents/mario.agent.md) | Identidade e fluxo do MARIO: as 6 fases, os gates de aprovação e os pré-requisitos. O detalhamento vive na skill `mario`. |
 
 ## Estrutura
 
 ```
 agents/
-├── mario.agent.md
-└── mario.json
+└── mario.agent.md
 skills/
 ├── advpl-tlpp-performance-analysis/
 │   ├── SKILL.md
@@ -88,12 +87,10 @@ A extensão Dex sincroniza apenas o conteúdo da pasta `skills`, então a instal
 dos agentes é manual:
 
 1. Abra o repositório do módulo no Kiro.
-2. Copie o arquivo do agente para `.kiro/agents/` do repositório alvo. O MARIO Agent
-   está disponível em dois formatos equivalentes — use o `mario.json` (recomendado
-   para o Kiro) ou o `mario.agent.md`; basta um dos dois.
+2. Copie o arquivo `agents/<nome>.agent.md` para `.kiro/agents/` do repositório alvo.
 3. O agente aparece na lista de agentes do Kiro e pode ser selecionado na sessão.
 
-O agente MARIO Agent depende da skill `mario`: instale as duas.
+O agente depende da skill de mesmo nome: instale as duas.
 
 ### Acionando as skills
 
