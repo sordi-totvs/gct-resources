@@ -1,2 +1,7 @@
+# Instalados localmente pela extensão Dex — não versionar
 /.kiro/agents
 /.kiro/skills
+
+# Steering é versionado (não ignorar)
+!/.kiro/steering
+/.vscode/.advpl
