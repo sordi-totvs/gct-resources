@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "feature": "apoio",
+  "title": "Questionário de Refinamento — apoio",
+  "status": "answered",
+  "questions": [
+    {
+      "id": "1.1",
+      "section": "Escopo e acionamento",
+      "text": "Onde este fluxo é definido? O fluxo de \"apoio\" deve ser incorporado à própria skill mario (nova reference + ajustes no SKILL.md) ou virar uma skill nova e independente?",
+      "essential": true,
+      "suggestion": "Incorporar ao MARIO como um fluxo alternativo, selecionado pelo tipo da issue, reaproveitando preflight, branch e controle de estado.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "1.2",
+      "section": "Escopo e acionamento",
+      "text": "Como o MARIO decide que a issue é do tipo \"apoio\"? Pelo campo de tipo da issue no JIRA (get-jira-issue), por instrução explícita do usuário, ou por ambos?",
+      "essential": true,
+      "suggestion": "Detectar pelo tipo/issuetype do JIRA e confirmar com o usuário no início; instrução explícita do usuário prevalece.",
+      "answer": "Exclusivamente pelo issuetype do Jira. Pode ser \"Apoio\" ou \"Apoio - Cliente\"."
+    },
+    {
+      "id": "1.3",
+      "section": "Escopo e acionamento",
+      "text": "\"apoio\" e \"apoio ao cliente\" são fluxos distintos ou o mesmo fluxo com destinatário e tom diferentes?",
+      "essential": true,
+      "suggestion": "Mesmo fluxo e mesmos artefatos; a diferença fica no destinatário e no ajuste de tom da \"Sugestão de resposta\".",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "2.1",
+      "section": "Artefatos e caminhos",
+      "text": "Onde ficam os artefatos deste fluxo? Usar a mesma pasta .specs/mario/{ISSUE}/ trocando apenas os nomes de arquivo?",
+      "essential": true,
+      "suggestion": "Sim, manter .specs/mario/{ISSUE}/ e o mesmo mario.status.md, só mudando os artefatos gerados neste fluxo.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "2.2",
+      "section": "Artefatos e caminhos",
+      "text": "Quais os nomes dos arquivos das fases (fase 1 = entendimento do pedido; fase 2 = parecer técnico + sugestão de resposta)?",
+      "essential": true,
+      "suggestion": "fase 1 = support-request.md; fase 2 = support-response.md",
+      "answer": "fase 1 = support-request.md; fase 2 = support-response.md"
+    },
+    {
+      "id": "2.3",
+      "section": "Artefatos e caminhos",
+      "text": "O fluxo de apoio usa mario.status.md e a mesma branch mario/{ISSUE}?",
+      "essential": false,
+      "suggestion": "Reaproveitar mario.status.md para rastreabilidade; dispensar a criação de branch, já que o fluxo não altera código-fonte (criar só se o usuário pedir).",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "3.1",
+      "section": "Fases, gates e proibições",
+      "text": "O fluxo de apoio tem gate humano ao fim de cada fase, como o MARIO padrão?",
+      "essential": true,
+      "suggestion": "Manter gate ao fim da fase 1 (aprovar entendimento) e ao fim da fase 2 (entrega da sugestão encerra o fluxo).",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "3.2",
+      "section": "Fases, gates e proibições",
+      "text": "As proibições do MARIO continuam valendo? O MARIO pode responder diretamente no JIRA/e-mail ou apenas entrega a sugestão de resposta?",
+      "essential": false,
+      "suggestion": "Mesmas proibições; o MARIO só entrega a \"Sugestão de resposta\" como texto (artefato + chat), nunca publica no JIRA nem envia e-mail.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "3.3",
+      "section": "Fases, gates e proibições",
+      "text": "O preflight do MARIO (MCP, skills, steerings) se aplica igual? Quais verificações permanecem obrigatórias sem as skills de bug?",
+      "essential": false,
+      "suggestion": "Manter verificação do MCP advpl-tlpp-mcp-docs e o levantamento de steerings; remover as skills de bug como bloqueantes neste fluxo.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "4.1",
+      "section": "Fase 2 — análise e resposta",
+      "text": "Quais fontes de análise são obrigatórias na fase 2 (código, TDN, issues anteriores, outras)?",
+      "essential": false,
+      "suggestion": "Todas conforme necessário; o parecer cita as fontes usadas e o MARIO não afirma API/tabela/campo do Protheus por memória (confirma no código ou no MCP).",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "4.2",
+      "section": "Fase 2 — análise e resposta",
+      "text": "O que a seção \"Sugestão de resposta\" deve conter além do texto (saudação, assinatura)?",
+      "essential": false,
+      "suggestion": "Corpo da mensagem pronto para copiar, com saudação e fechamento amigáveis, sem assinatura pessoal.",
+      "answer": "manter sugestão"
+    },
+    {
+      "id": "4.3",
+      "section": "Fase 2 — análise e resposta",
+      "text": "Idioma da sugestão de resposta: sempre português do Brasil ou pode variar (mercado internacional)?",
+      "essential": false,
+      "suggestion": "Português do Brasil por padrão; variar só se a issue indicar explicitamente outro idioma.",
+      "answer": "manter sugestão"
+    }
+  ]
+}
