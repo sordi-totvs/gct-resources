@@ -1,29 +1,23 @@
 ---
 name: gct-new-browse
 description: >-
-  Implementa ou revisa, de forma minuciosa, a adoção do novo browse do Protheus
-  (visualização de dados Smart X) em rotinas legadas que abrem a tela com a
-  função mBrowse (SetSmartX) ou com a classe FWMBrowse (oBrowse:SetSmartX),
-  sempre protegida por hasSmartX. No modo implementação, exige que o usuário
-  informe a rotina e não prossegue sem ela; identifica o tipo de browse, ativa o
-  Smart X com índice e ordenação iniciais e ajusta legendas (cColorPoUi e
-  de-para de cores), filtros (cFilterDefault no mBrowse, AddFilterSmartX no
-  FWMBrowse, DbSetFilter), MenuDef (pageAction, Imprimir com operação 8,
-  Pesquisa e Legenda), usos do objeto após a ativação (isSmartX) e métodos sem
-  suporte no Smart X. No modo code review, compara por padrão a branch atual com
-  a branch principal do git e emite um relatório por regra com severidade,
-  evidência (arquivo e linha) e correção sugerida. Nunca compila, nunca commita e
-  nunca abre pull request. Use quando o usuário disser: novo browse, browse
-  Smart X, browse SmartX no mBrowse, browse SmartX no FWMBrowse, implementar o
-  novo browse, converter mBrowse para Smart X, converter FWMBrowse para Smart X,
-  setSmartX, hasSmartX, AddFilterSmartX, ativar Smart X na rotina, revisar o
-  novo browse, code review do novo browse, revisar setSmartX, gct-new-browse.
+  Implementa ou revisa a adoção do novo browse do Protheus (visualização de dados
+  Smart X) em rotinas legadas que abrem a tela com a função mBrowse (SetSmartX) ou
+  com a classe FWMBrowse (oBrowse:SetSmartX), sempre protegida por hasSmartX. No
+  modo implementação ativa o Smart X com índice e ordenação iniciais e ajusta
+  legendas, filtros, MenuDef e usos do objeto após a ativação. No modo code review
+  compara a branch atual com a principal do git e emite relatório por regra com
+  evidência e correção sugerida. Nunca compila, commita nem abre pull request.
+  Use quando o usuário disser: novo browse, browse SmartX no mBrowse ou no
+  FWMBrowse, implementar o novo browse, converter mBrowse ou FWMBrowse para Smart
+  X, setSmartX, hasSmartX, AddFilterSmartX, ativar Smart X, revisar ou code review
+  do novo browse, gct-new-browse.
 license: MIT
 metadata:
   domain: Protheus
   maintainer: Engenharia Protheus - Gestão de Contratos / Gestão de Receitas
   author: guilherme.sordi@totvs.com.br
-  version: 1.1.0
+  version: 1.1.1
   category: Development / Code Review
 ---
 

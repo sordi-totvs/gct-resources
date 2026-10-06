@@ -6,10 +6,10 @@ description: >-
   contexto, causa raiz, correção, alterações, testes). Antes de analisar,
   verifica se existem alterações pendentes de commit e, se existirem, para e
   pergunta ao usuário se devem ser consideradas. Entrega o texto no chat em
-  markdown pronto para copiar e colar, encerrando com a seção TEXTO PARA
-  CHECK-IN NO TFS — resumo curto em texto puro, sem crase, dentro de bloco de
-  código, seguido do ID da task no formato {sub-tarefa de codificação}\{issue
-  principal}, resolvido via JIRA quando possível. Use quando o usuário disser:
+  markdown pronto para colar, encerrando com a seção TEXTO PARA CHECK-IN NO TFS —
+  resumo curto em texto puro, sem crase, em bloco de código, seguido do ID da
+  task no formato {sub-tarefa de codificação}\{issue principal}, resolvido via
+  JIRA quando possível. Use quando o usuário disser:
   redige o texto do PR, texto do PR, escreve o PR, descrição do PR, monta o
   pull request, gct-pr-text, texto de check-in, comentário de check-in do TFS,
   resumo para commit no TFS.
@@ -18,7 +18,7 @@ metadata:
   domain: Protheus
   module: SIGAGCT - Gestão de Contratos
   maintainer: Engenharia Protheus - Gestão de Contratos
-  version: 1.0.0
+  version: 1.0.1
   category: Documentation / Delivery
 ---
 

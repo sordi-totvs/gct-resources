@@ -6,10 +6,9 @@ description: >-
   sobre integrated provider), comparando os dois caminhos para provar o gargalo
   e propor a correção mínima. Estende a skill advpl-tlpp-sdd (bug track) com uma
   fase de Análise Comparativa Legado x Smart View, alimentada por dois
-  LogProfiler (legado e Smart View) e pelo plano de execução da query principal
-  do objeto de negócio. Recebe código da issue, nome do fonte legado e nome do
-  fonte de menu do Smart View (de onde extrai o objeto de negócio na chamada
-  callSmartView / callTReports). Use quando: relatório Smart View lento,
+  LogProfiler e pelo plano de execução da query principal. Recebe código da
+  issue, nome do fonte legado e nome do fonte de menu do Smart View. Use quando:
+  relatório Smart View lento,
   extração demorada, "Servidor não respondendo" no TReports, regressão de
   performance após migrar para Smart View, analisar LogProfiler, comparar legado
   com Smart View, analisar plano de execução, encontrar hotspot, gargalo, N+1 em
@@ -19,7 +18,7 @@ metadata:
   domain: Protheus
   maintainer: Engenharia Protheus - SIGAFIN
   author: Fabio H. Andrade
-  version: 1.1.0
+  version: 1.1.1
   category: Performance Analysis
 ---
 

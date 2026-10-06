@@ -8,8 +8,17 @@ As datas das versões publicadas usam o formato mensal `YYYY-MM`.
 
 ## [Não publicado]
 
+### Adicionado
+
+- `AGENTS.md`: regra de limite de 1024 caracteres no campo `description` de skills
+  (`skills/*/SKILL.md`) e de agentes (`agents/*.agent.md` e `agents/*.json`), com
+  orientação para priorizar as frases de acionamento ao resumir.
+
 ### Modificado
 
+- Descrições encurtadas para respeitar o limite de 1024 caracteres do Kiro, sem
+  perder as frases de acionamento: `mario` (1.3.1), `gct-new-browse` (1.1.1),
+  `advpl-tlpp-performance-analysis` (1.1.1) e `gct-pr-text` (1.0.1).
 - Skill `mario` (1.3.0) e agente MARIO (`mario.agent.md` e `mario.json`): a
   verificação de branch deixa de exigir o nome `mario/{ISSUE}` e passa a aceitar
   qualquer nome de branch que contenha o código da issue, independentemente de

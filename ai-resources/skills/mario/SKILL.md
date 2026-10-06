@@ -1,29 +1,22 @@
 ---
 name: mario
 description: >-
-  Conduz a resolução de uma issue do TOTVS Protheus por execução, de forma
-  interativa e com aprovação humana ao final de cada fase, em um de dois fluxos
-  escolhidos pelo issuetype do JIRA. Fluxo de manutenção (bug): 6 fases,
-  executando refinamento de negócio, refinamento técnico e codificação, delegando
-  às skills advpl-tlpp-sdd, gct-tests, tdn-technical-doc-writer e gct-pr-text.
-  Fluxo de apoio (issuetype Apoio ou Apoio - Cliente): 2 fases, entendendo o
-  pedido do time de suporte ou do cliente (support-request.md) e produzindo um
-  parecer técnico com sugestão de resposta (support-response.md), sem alterar
-  código. Grava todos os artefatos em `.specs/mario/{ISSUE}`. Nunca compila, nunca
-  executa, nunca commita, nunca abre pull request, nunca publica no Confluence e
-  nunca responde no JIRA ou por e-mail. Agnóstico de módulo Protheus.
+  Resolve uma issue do TOTVS Protheus, com aprovação humana ao final de cada fase,
+  em um de dois fluxos escolhidos pelo issuetype do JIRA: manutenção (bug) em 6
+  fases que delegam às skills especializadas, ou apoio (Apoio ou Apoio - Cliente)
+  em 2 fases que produzem um parecer técnico com sugestão de resposta, sem alterar
+  código. Agnóstico de módulo.
   Use quando o usuário disser: rodar o mario, mario da issue, refinar a issue,
-  refinamento de negócio da issue, isso é bug mesmo, refinamento técnico da
-  issue, rodar a fase 1 da issue, rodar a fase 2 da issue, rodar a fase 3 da
-  issue, corrigir essa issue, resolver esse bug do começo ao fim, retomar a
-  issue no mario, code review da issue, issue de apoio, apoio ao cliente,
-  responder o apoio, sugestão de resposta para a issue, parecer técnico do apoio.
+  refinamento de negócio ou técnico da issue, isso é bug mesmo, rodar a fase 1, 2
+  ou 3 da issue, corrigir essa issue, retomar a issue no mario, code review da
+  issue, issue de apoio, apoio ao cliente, responder o apoio, parecer técnico do
+  apoio.
 license: MIT
 metadata:
   domain: Protheus
   maintainer: Engenharia Protheus - Gestão de Contratos / Gestão de Receitas
   author: guilherme.sordi@totvs.com.br
-  version: 1.3.0
+  version: 1.3.1
   category: Maintenance / Spec-Driven Development
   depends-on: advpl-tlpp-sdd, advpl-tlpp-root-cause-analysis, kanoah-advpr-generator, tdn-technical-doc-writer, gct-tests, gct-pr-text
 ---

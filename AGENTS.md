@@ -53,6 +53,15 @@ Não leia nem escreva em `.specs/dex/` fora das skills `dex-spec-manage` e
 - A `description` é o único gatilho de ativação: descreva **o que a skill faz** e
   termine com as frases de acionamento reais, no formato
   `Use quando o usuário disser: ...`. Sem os gatilhos, a skill não é encontrada.
+- **Limite de 1024 caracteres na `description`.** O Kiro trunca descrições acima
+  desse limite, então o campo `description` de toda skill (`skills/*/SKILL.md`) e
+  de todo agente (`agents/*.agent.md` e o `description` equivalente no
+  `agents/*.json`) deve ter **no máximo 1024 caracteres**, contando o texto já
+  concatenado (sem os marcadores de bloco YAML `>-` nem a indentação). Priorize as
+  frases de acionamento (`Use quando o usuário disser: ...`): ao faltar espaço,
+  resuma a parte descritiva e preserve os gatilhos, pois sem eles o recurso não é
+  encontrado. O detalhamento removido vai para o corpo do `SKILL.md` ou para
+  `references/*.md`.
 - Aplique **divulgação progressiva**: o `SKILL.md` traz o fluxo e as decisões;
   detalhamento longo (templates, tabelas de referência, exemplos extensos) vai
   para `references/*.md`, referenciado por caminho relativo a partir do `SKILL.md`.
