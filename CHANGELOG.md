@@ -8,6 +8,8 @@ As datas das versões publicadas usam o formato mensal `YYYY-MM`.
 
 ## [Não publicado]
 
+## [1.0.0] - 2026-10
+
 ### Adicionado
 
 - `CHANGELOG.md` na raiz do repositório, para registrar o histórico de mudanças.
