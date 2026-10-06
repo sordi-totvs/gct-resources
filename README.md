@@ -12,7 +12,7 @@ Contém skills do Kiro utilizadas no dia a dia dos times para automação de doc
 | [gct-sdd](ai-resources/skills/gct-sdd/SKILL.md) | Orquestra em paralelo a documentação de múltiplas issues do JIRA — cria `bug-spec.md` e `rca.md` em branches isoladas, uma por issue, sem interação humana. |
 | [gct-tests](ai-resources/skills/gct-tests/SKILL.md) | Cria caso de teste de regressão (Kanoah / Adaptavist) e script AdvPR a partir de uma issue do módulo Gestão de Contratos (SIGAGCT). |
 | [gct-pr-text](ai-resources/skills/gct-pr-text/SKILL.md) | Redige o texto do Pull Request a partir das alterações da branch atual em relação à master, incluindo o resumo para check-in no TFS. |
-| [gct-new-browse](ai-resources/skills/gct-new-browse/SKILL.md) | Implementa ou revisa minuciosamente a ativação do novo browse Smart X no `mBrowse` de rotinas legadas (`hasSmartX`/`SetSmartX`, legendas, filtros, `MenuDef`). A implementação exige a rotina informada; o code review compara, por padrão, a branch atual com a branch principal. |
+| [gct-new-browse](ai-resources/skills/gct-new-browse/SKILL.md) | Implementa ou revisa minuciosamente a ativação do novo browse Smart X em rotinas legadas com `mBrowse` (`hasSmartX`/`SetSmartX`) ou `FWMBrowse` (`hasSmartX`/`oBrowse:SetSmartX`), incluindo legendas, filtros e `MenuDef`. A implementação exige a rotina informada; o code review compara, por padrão, a branch atual com a branch principal. |
 | [advpl-tlpp-performance-analysis](ai-resources/skills/advpl-tlpp-performance-analysis/SKILL.md) | Análise comparativa de performance entre relatório legado (AdvPL/TLPP) e Smart View / TReports, a partir de LogProfiler e do plano de execução da query do objeto de negócio. |
 
 ## Agentes
@@ -54,6 +54,7 @@ ai-resources/
     ├── gct-new-browse/
     │   ├── SKILL.md
     │   └── references/
+    │       ├── fwmbrowse-smartx.md
     │       └── mbrowse-smartx.md
     └── advpl-tlpp-performance-analysis/
         ├── SKILL.md

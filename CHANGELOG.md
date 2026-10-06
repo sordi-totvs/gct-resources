@@ -59,12 +59,16 @@ As datas das versões publicadas usam o formato mensal `YYYY-MM`.
   amigável). Reference nova `references/flow-support.md`. As skills de bug não são
   bloqueantes neste fluxo, e o MARIO nunca publica a resposta no JIRA nem por
   e-mail.
-- Skill `gct-new-browse` — implementa ou faz code review minucioso da ativação do
-  novo browse Smart X no `mBrowse` de rotinas legadas. A implementação não prossegue
-  sem a rotina informada; o code review compara, por padrão, a branch atual com a
-  branch principal do git e avalia um checklist de 18 regras (NB-01..NB-18). Reference
-  `references/mbrowse-smartx.md` com a transcrição da página do TDN "mBrowse -
-  Abertura do browse utilizando Smart X".
+- Skill `gct-new-browse` (1.1.0) — implementa ou faz code review minucioso da
+  ativação do novo browse Smart X em rotinas legadas que usam a função `mBrowse` ou a
+  classe `FWMBrowse`. A implementação não prossegue sem a rotina informada; o code
+  review compara, por padrão, a branch atual com a branch principal do git e avalia
+  regras comuns (NB) e específicas de cada tipo (MB para `mBrowse`, FB para
+  `FWMBrowse`). References `references/mbrowse-smartx.md` e
+  `references/fwmbrowse-smartx.md`, com as transcrições das páginas do TDN "mBrowse -
+  Abertura do browse utilizando Smart X" e "FWMBrowse - Abertura do browse utilizando
+  Smart X" (versão de 25/08/2026); a segunda resume o que é igual e o que difere
+  entre os dois tipos.
 
 ### Modificado
 
