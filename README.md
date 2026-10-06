@@ -12,6 +12,7 @@ Contém skills do Kiro utilizadas no dia a dia dos times para automação de doc
 | [gct-sdd](ai-resources/skills/gct-sdd/SKILL.md) | Orquestra em paralelo a documentação de múltiplas issues do JIRA — cria `bug-spec.md` e `rca.md` em branches isoladas, uma por issue, sem interação humana. |
 | [gct-tests](ai-resources/skills/gct-tests/SKILL.md) | Cria caso de teste de regressão (Kanoah / Adaptavist) e script AdvPR a partir de uma issue do módulo Gestão de Contratos (SIGAGCT). |
 | [gct-pr-text](ai-resources/skills/gct-pr-text/SKILL.md) | Redige o texto do Pull Request a partir das alterações da branch atual em relação à master, incluindo o resumo para check-in no TFS. |
+| [gct-new-browse](ai-resources/skills/gct-new-browse/SKILL.md) | Implementa ou revisa minuciosamente a ativação do novo browse Smart X no `mBrowse` de rotinas legadas (`hasSmartX`/`SetSmartX`, legendas, filtros, `MenuDef`). A implementação exige a rotina informada; o code review compara, por padrão, a branch atual com a branch principal. |
 | [advpl-tlpp-performance-analysis](ai-resources/skills/advpl-tlpp-performance-analysis/SKILL.md) | Análise comparativa de performance entre relatório legado (AdvPL/TLPP) e Smart View / TReports, a partir de LogProfiler e do plano de execução da query do objeto de negócio. |
 
 ## Agentes
@@ -50,6 +51,10 @@ ai-resources/
     │       └── test-case-template.md
     ├── gct-pr-text/
     │   └── SKILL.md
+    ├── gct-new-browse/
+    │   ├── SKILL.md
+    │   └── references/
+    │       └── mbrowse-smartx.md
     └── advpl-tlpp-performance-analysis/
         ├── SKILL.md
         ├── references/
@@ -96,6 +101,8 @@ Após a instalação, acione via chat do Kiro:
 - `"responder o apoio da DTEXPRO-6900"` — fluxo de apoio
 - `"rodar gct-sdd DTEXPRO-6805, DTEXPRO-6866"`
 - `"criar caso de teste da issue GCT-1234"`
+- `"implementar o novo browse na rotina CNTA100"`
+- `"code review do novo browse"` — compara a branch atual com a branch principal
 
 ## Licença
 

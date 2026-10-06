@@ -47,11 +47,19 @@ As datas das versões publicadas usam o formato mensal `YYYY-MM`.
   amigável). Reference nova `references/flow-support.md`. As skills de bug não são
   bloqueantes neste fluxo, e o MARIO nunca publica a resposta no JIRA nem por
   e-mail.
+- Skill `gct-new-browse` — implementa ou faz code review minucioso da ativação do
+  novo browse Smart X no `mBrowse` de rotinas legadas. A implementação não prossegue
+  sem a rotina informada; o code review compara, por padrão, a branch atual com a
+  branch principal do git e avalia um checklist de 18 regras (NB-01..NB-18). Reference
+  `references/mbrowse-smartx.md` com a transcrição da página do TDN "mBrowse -
+  Abertura do browse utilizando Smart X".
 
 ### Modificado
 
 - `README.md`: catálogo de skills e árvore de estrutura atualizados para incluir
   `advpl-tlpp-performance-analysis` e `gct-pr-text`.
+- `README.md`: catálogo de skills, árvore de estrutura e exemplos de acionamento
+  atualizados para incluir `gct-new-browse`.
 - `README.md`: seção de agentes, skill `mario` no catálogo, pasta `agents/` na árvore
   de estrutura e instruções de instalação do agente.
 - Skill `gct-pr-text` (1.1.0): a gravação do texto do PR em arquivo, quando pedida
