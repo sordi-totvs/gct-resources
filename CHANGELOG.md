@@ -38,6 +38,15 @@ As datas das versões publicadas usam o formato mensal `YYYY-MM`.
 - Steering `mario-agent-sync` (em `.kiro/steering/`) instruindo a manter
   `mario.agent.md` e `mario.json` sempre sincronizados na mesma tarefa.
 - Documento `docs/protheus-ia.excalidraw` com o fluxo de uso do Dex.
+- Fluxo de apoio na skill `mario` (1.2.0), para issues de issuetype `Apoio` e
+  `Apoio - Cliente`: 2 fases, cada uma com gate humano, sem alterar código-fonte.
+  A fase 1 gera `support-request.md` (o que foi entendido, o que não foi entendido,
+  dúvidas ao usuário e, só quando o código-fonte não basta, uma seção de testes a
+  serem feitos no sistema); a fase 2 gera `support-response.md` (parecer técnico e
+  a seção "Sugestão de resposta" em tom de e-mail corporativo pouco formal e
+  amigável). Reference nova `references/flow-support.md`. As skills de bug não são
+  bloqueantes neste fluxo, e o MARIO nunca publica a resposta no JIRA nem por
+  e-mail.
 
 ### Modificado
 
@@ -59,6 +68,16 @@ As datas das versões publicadas usam o formato mensal `YYYY-MM`.
   sobre os defaults delas. A declaração do `ancestor_id` no `technical-doc.md`
   passou a ser condicional: resolvido pela convenção quando uma steering o fixa, só
   pendência quando nenhuma steering resolve o valor.
+- Skill `mario` (1.2.0): deixa de ser exclusiva de manutenção (bug) e passa a
+  escolher entre dois fluxos pelo issuetype do JIRA, decidido no preflight (novo
+  item "Seleção do fluxo"). As seis fases viraram o "fluxo de manutenção"; o
+  preflight de skills bloqueantes, a branch de trabalho e as delegações passaram a
+  ser explicitamente escopados a esse fluxo; o `mario.status.md` ganhou a linha
+  `Fluxo` e a árvore de artefatos passou a listar os arquivos de cada fluxo. A
+  `description` do frontmatter e os gatilhos foram ampliados para cobrir apoio.
+- Agente MARIO Agent (`mario.agent.md` e `mario.json`) atualizado em paralelo à
+  skill: `description`, tabela de fluxos, pré-requisitos, proibições e acionamento
+  passam a refletir os dois fluxos.
 
 ### Corrigido
 

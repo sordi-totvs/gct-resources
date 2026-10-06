@@ -1,41 +1,59 @@
 ---
 name: mario
 description: >-
-  Conduz a resolução de uma issue de manutenção (bug) do TOTVS Protheus em um
-  fluxo de 6 fases, executando as três primeiras — refinamento de negócio,
-  refinamento técnico e codificação — e encerrando cada uma em aprovação humana
-  explícita. Trata uma issue por execução, grava todos os artefatos em
-  `.specs/mario/{ISSUE}` e delega às skills advpl-tlpp-sdd, gct-tests,
-  tdn-technical-doc-writer e gct-pr-text sobrepondo os caminhos default delas.
-  Nunca compila, nunca executa, nunca commita, nunca abre pull request e nunca
-  publica no Confluence. Agnóstico de módulo Protheus.
+  Conduz a resolução de uma issue do TOTVS Protheus por execução, de forma
+  interativa e com aprovação humana ao final de cada fase, em um de dois fluxos
+  escolhidos pelo issuetype do JIRA. Fluxo de manutenção (bug): 6 fases,
+  executando refinamento de negócio, refinamento técnico e codificação, delegando
+  às skills advpl-tlpp-sdd, gct-tests, tdn-technical-doc-writer e gct-pr-text.
+  Fluxo de apoio (issuetype Apoio ou Apoio - Cliente): 2 fases, entendendo o
+  pedido do time de suporte ou do cliente (support-request.md) e produzindo um
+  parecer técnico com sugestão de resposta (support-response.md), sem alterar
+  código. Grava todos os artefatos em `.specs/mario/{ISSUE}`. Nunca compila, nunca
+  executa, nunca commita, nunca abre pull request, nunca publica no Confluence e
+  nunca responde no JIRA ou por e-mail. Agnóstico de módulo Protheus.
   Use quando o usuário disser: rodar o mario, mario da issue, refinar a issue,
   refinamento de negócio da issue, isso é bug mesmo, refinamento técnico da
   issue, rodar a fase 1 da issue, rodar a fase 2 da issue, rodar a fase 3 da
   issue, corrigir essa issue, resolver esse bug do começo ao fim, retomar a
-  issue no mario, code review da issue.
+  issue no mario, code review da issue, issue de apoio, apoio ao cliente,
+  responder o apoio, sugestão de resposta para a issue, parecer técnico do apoio.
 license: MIT
 metadata:
   domain: Protheus
   maintainer: Engenharia Protheus - Gestão de Contratos / Gestão de Receitas
   author: guilherme.sordi@totvs.com.br
-  version: 1.1.0
+  version: 1.2.0
   category: Maintenance / Spec-Driven Development
   depends-on: advpl-tlpp-sdd, advpl-tlpp-root-cause-analysis, kanoah-advpr-generator, tdn-technical-doc-writer, gct-tests, gct-pr-text
 ---
 
-# MARIO — Resolução de issues de manutenção do Protheus
+# MARIO — Resolução de issues do Protheus
 
 MARIO trata **uma issue por execução**, de forma interativa, dentro do repositório
-de módulo aberto no workspace. Ele conduz o refinamento de negócio, o refinamento
+de módulo aberto no workspace. Ao final de cada fase executada pelo MARIO existe
+um **gate**: o turno encerra e nada avança sem aprovação explícita do usuário.
+
+MARIO tem **dois fluxos**, escolhidos pelo issuetype do JIRA:
+
+| Fluxo | Issuetype | Fases | Reference |
+| --- | --- | --- | --- |
+| Manutenção (bug) | qualquer um que não seja de apoio | 6 fases | references de fase abaixo |
+| Apoio | `Apoio`, `Apoio - Cliente` | 2 fases | [flow-support.md](references/flow-support.md) |
+
+No fluxo de manutenção, MARIO conduz o refinamento de negócio, o refinamento
 técnico e a codificação; validação, merge e teste de aceitação permanecem com
-pessoas.
+pessoas. No fluxo de apoio, MARIO entende o pedido de apoio e produz uma sugestão
+de resposta ao solicitante; ele não altera código-fonte.
 
-O trabalho é organizado em 6 fases. Ao final de cada fase executada pelo MARIO
-existe um **gate**: o turno encerra e nada avança sem aprovação explícita do
-usuário.
+A **seleção do fluxo** acontece no preflight (ver "Preflight", item 1) e é
+**exclusiva pelo issuetype** obtido no `get-jira-issue`. Este `SKILL.md` descreve o
+fluxo de manutenção; para o fluxo de apoio, carregue a `flow-support.md` e ignore
+as seções específicas de bug (fases 2–6, skills de bug bloqueantes, branch de
+código). As regras comuns — preflight, estado, gates, caminhos, proibições —
+valem para os dois fluxos.
 
-## Fluxo das 6 fases
+## Fluxo de manutenção — as 6 fases
 
 | Fase | Executor | Artefatos | Skills delegadas | Encerramento |
 | --- | --- | --- | --- | --- |
@@ -46,13 +64,14 @@ usuário.
 | 5 — Code review | MARIO, sob demanda | resultado no chat | `code-review` | — |
 | 6 — Teste de aceitação | humano (CI/CD gera o `.ptm`) | — | — | — |
 
-Detalhamento de cada fase executável:
+Detalhamento de cada fase executável do fluxo de manutenção:
 
 - [phase-1-business-refinement.md](references/phase-1-business-refinement.md)
 - [phase-2-technical-refinement.md](references/phase-2-technical-refinement.md)
 - [phase-3-coding.md](references/phase-3-coding.md)
 
 Carregue a reference da fase que vai executar. Não carregue as três de uma vez.
+O fluxo de apoio tem reference própria: [flow-support.md](references/flow-support.md).
 
 ---
 
@@ -61,7 +80,24 @@ Carregue a reference da fase que vai executar. Não carregue as três de uma vez
 Executar **antes de qualquer fase**, inclusive quando o usuário aciona uma fase
 isolada. O preflight não produz artefato.
 
-### 1. MCP `advpl-tlpp-mcp-docs`
+### 1. Seleção do fluxo
+
+Obtenha o issuetype da issue com `get-jira-issue` e escolha o fluxo **exclusivamente**
+por ele:
+
+| Issuetype | Fluxo |
+| --- | --- |
+| `Apoio` ou `Apoio - Cliente` | apoio — carregue a [flow-support.md](references/flow-support.md) |
+| qualquer outro | manutenção (bug) — 6 fases deste `SKILL.md` |
+
+Não decida o fluxo por instrução do usuário nem por heurística de texto: a origem
+é o issuetype. Issue não encontrada ou sem acesso: **pare** e peça os dados ao
+usuário — sem o issuetype não há como escolher o fluxo. Registre o fluxo escolhido
+no `mario.status.md`.
+
+O item 3 (skills bloqueantes) depende do fluxo selecionado aqui.
+
+### 2. MCP `advpl-tlpp-mcp-docs`
 
 Faça uma chamada real e barata para provar que o MCP responde — por exemplo
 `language-system-docs-search` com `limit: 1`. Presença de tool na lista não é
@@ -77,11 +113,16 @@ Se a tool não existir ou a chamada falhar, **não interrompa**. Informe:
 Registre a resposta no `mario.status.md` e **repita o aviso no encerramento de
 cada fase** executada em modo degradado.
 
-### 2. Skills bloqueantes
+### 3. Skills bloqueantes
 
-Verifique a existência de `SKILL.md` para cada uma das seis skills abaixo, em
-`.kiro/skills/{skill}/SKILL.md` do workspace e, como alternativa, no diretório de
-skills do usuário (em VS Code o caminho instalado é `.agents/skills/{skill}/`):
+**Aplicável apenas ao fluxo de manutenção.** O fluxo de apoio não delega para
+essas skills, então **nenhuma delas é bloqueante** nele — pule este item e siga
+para o item 4.
+
+No fluxo de manutenção, verifique a existência de `SKILL.md` para cada uma das
+seis skills abaixo, em `.kiro/skills/{skill}/SKILL.md` do workspace e, como
+alternativa, no diretório de skills do usuário (em VS Code o caminho instalado é
+`.agents/skills/{skill}/`):
 
 | Skill | Para quê |
 | --- | --- |
@@ -100,12 +141,18 @@ Skills usadas mas **não** bloqueantes: `utf8-to-cp1252-conversion` (fase 3),
 `code-review` (fase 5) e `tdn-technical-doc-review` (auditoria interna da
 `tdn-technical-doc-writer`). Na ausência delas, avise a degradação e siga.
 
-### 3. Steerings aplicáveis
+### 4. Steerings aplicáveis
 
 As skills delegadas operam pelos defaults genéricos delas. As regras específicas
 do repositório alvo vivem em `.kiro/steering/*.md`, e é o MARIO quem precisa
 levá-las até cada delegação — as skills não as enxergam sozinhas. Levante-as aqui,
 no preflight, para não descobri-las tarde demais.
+
+No fluxo de apoio não há delegação, mas o levantamento continua valendo: uma
+steering pode afetar como o `support-request.md` e o `support-response.md` são
+escritos (vocabulário, convenções de resposta ao cliente). O mapeamento por
+"fase / delegação" abaixo é do fluxo de manutenção; no fluxo de apoio, mapeie a
+regra para a fase 1 ou 2 correspondente.
 
 1. **Liste** os arquivos de `.kiro/steering/` do repositório alvo. Se o diretório
    não existir ou a leitura falhar, **não é erro e não aborta**: registre "sem
@@ -145,6 +192,10 @@ rastreabilidade.
 
 ## Branch de trabalho
 
+Esta seção vale para o **fluxo de manutenção**, que altera código. O **fluxo de
+apoio não cria branch por padrão**, por não escrever fonte; só crie a branch se o
+usuário pedir, e nesse caso valem as mesmas regras abaixo.
+
 A branch do MARIO é `mario/{ISSUE}`, com a chave em maiúsculas — a mesma forma da
 pasta de artefatos. O prefixo `kiro/` pertence à `gct-sdd`; nunca use.
 
@@ -176,6 +227,7 @@ ao final de cada uma.
 
 - **Issue:** {ISSUE} — {título}
 - **Link:** https://jiraproducao.totvs.com.br/browse/{ISSUE}
+- **Fluxo:** manutenção | apoio ({issuetype})
 - **Branch:** {branch atual}
 - **Fase atual:** {n} — {nome} | aguardando aprovação | aprovada
 - **Modo degradado:** não | sim ({motivo}, autorizado em {data})
@@ -244,6 +296,8 @@ confirmação que dispense a fase anterior.
 descritivo. Aceite na entrada chave em minúsculas, ID numérico ou URL do JIRA, e
 normalize para a chave em maiúsculas.
 
+No **fluxo de manutenção**:
+
 ```
 .specs/mario/{ISSUE}/
 ├── mario.status.md          # controle
@@ -259,8 +313,18 @@ normalize para a chave em maiúsculas.
 └── side-findings.md         # fase 3, só se houver achados
 ```
 
-Único artefato fora dessa árvore: o script AdvPR, em
-`tests/Scripts AdvPR/Cases/{Rotina}TestCase.PRW` do repositório alvo.
+No **fluxo de apoio**:
+
+```
+.specs/mario/{ISSUE}/
+├── mario.status.md          # controle
+├── support-request.md       # fase 1 — apoio
+└── support-response.md      # fase 2 — apoio
+```
+
+Único artefato fora dessa árvore (só no fluxo de manutenção): o script AdvPR, em
+`tests/Scripts AdvPR/Cases/{Rotina}TestCase.PRW` do repositório alvo. O fluxo de
+apoio não gera artefato fora de `.specs/mario/{ISSUE}/`.
 
 O MARIO **não** cria nem atualiza `.specs/project/`, `.specs/codebase/` ou
 `.specs/HANDOFF.md`. Se existirem no repositório alvo, podem ser lidos como
@@ -302,6 +366,11 @@ Encontrando artefato fora, mova para o caminho correto e avise o usuário.
 
 ## Fase 4 — Validação (humana)
 
+As fases 4 a 6 pertencem ao **fluxo de manutenção**. O fluxo de apoio encerra na
+sua fase 2 (ver [flow-support.md](references/flow-support.md)), sem fases
+subsequentes; o code review sob demanda descrito na fase 5 pode ser acionado sobre
+qualquer código, mas o fluxo de apoio não altera código-fonte.
+
 Fora do escopo executável. No gate da fase 3, diga ao usuário o que ele precisa
 validar antes de seguir com o PR:
 
@@ -342,6 +411,10 @@ Valem em todas as fases, sem exceção e sem "só desta vez":
 - não escrever em `.specs/project/`, `.specs/codebase/` ou `.specs/HANDOFF.md`;
 - não avançar de fase sem aprovação registrada.
 
+No **fluxo de apoio**, uma proibição a mais: o MARIO entrega a "Sugestão de
+resposta" apenas como texto (artefato + chat) e **não** publica a resposta no JIRA
+nem envia e-mail.
+
 Duas obrigações que a proibição de compilar não dispensa:
 
 - **Encoding.** Todo fonte AdvPL/TLPP tocado na fase 3 é convertido para CP-1252
@@ -375,7 +448,7 @@ para `.specs/mario/{ISSUE}/`) ou recomeçar.
 
 ## Checklist de encerramento de fase
 
-- [ ] Preflight executado; modo degradado e steerings aplicáveis registrados, se houver.
+- [ ] Preflight executado; fluxo selecionado pelo issuetype e registrado; modo degradado e steerings aplicáveis registrados, se houver.
 - [ ] Branch conferida e o desfecho aplicado.
 - [ ] Regras das steerings aplicáveis a esta fase foram repassadas às delegações e conferidas nos artefatos produzidos.
 - [ ] Todos os artefatos da fase existem em `.specs/mario/{ISSUE}/`.
