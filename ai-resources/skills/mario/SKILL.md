@@ -23,7 +23,7 @@ metadata:
   domain: Protheus
   maintainer: Engenharia Protheus - Gestão de Contratos / Gestão de Receitas
   author: guilherme.sordi@totvs.com.br
-  version: 1.2.0
+  version: 1.3.0
   category: Maintenance / Spec-Driven Development
   depends-on: advpl-tlpp-sdd, advpl-tlpp-root-cause-analysis, kanoah-advpr-generator, tdn-technical-doc-writer, gct-tests, gct-pr-text
 ---
@@ -49,8 +49,8 @@ de resposta ao solicitante; ele não altera código-fonte.
 A **seleção do fluxo** acontece no preflight (ver "Preflight", item 1) e é
 **exclusiva pelo issuetype** obtido no `get-jira-issue`. Este `SKILL.md` descreve o
 fluxo de manutenção; para o fluxo de apoio, carregue a `flow-support.md` e ignore
-as seções específicas de bug (fases 2–6, skills de bug bloqueantes, branch de
-código). As regras comuns — preflight, estado, gates, caminhos, proibições —
+as seções específicas de bug (fases 2–6, skills de bug bloqueantes). As regras
+comuns — preflight, estado, verificação de branch, gates, caminhos, proibições —
 valem para os dois fluxos.
 
 ## Fluxo de manutenção — as 6 fases
@@ -192,26 +192,26 @@ rastreabilidade.
 
 ## Branch de trabalho
 
-Esta seção vale para o **fluxo de manutenção**, que altera código. O **fluxo de
-apoio não cria branch por padrão**, por não escrever fonte; só crie a branch se o
-usuário pedir, e nesse caso valem as mesmas regras abaixo.
+O MARIO **não cria branch** — ele trabalha na branch que o usuário já deixou ativa.
+A única exigência é que o nome dessa branch **contenha o código da issue**
+(`{ISSUE}`) em algum ponto. O prefixo não importa: `mario/`, `kiro/`, `feature/`,
+`bugfix/` ou qualquer outro texto antes do código é aceito, desde que o código da
+issue apareça no nome. O estado da árvore (limpa ou suja) **não** altera essa
+verificação.
 
-A branch do MARIO é `mario/{ISSUE}`, com a chave em maiúsculas — a mesma forma da
-pasta de artefatos. O prefixo `kiro/` pertence à `gct-sdd`; nunca use.
-
-No início de qualquer parte do fluxo, confira a branch atual (`git branch --show-current`).
-Se não for `mario/{ISSUE}`, informe o usuário e pergunte se deve criar a branch a
-partir da master. Os quatro desfechos:
+No início de qualquer parte do fluxo, confira a branch atual
+(`git branch --show-current`) e verifique se o nome contém `{ISSUE}` (a chave do
+JIRA, comparada sem diferenciar maiúsculas de minúsculas). Dois desfechos:
 
 | Situação | Comportamento |
 | --- | --- |
-| Criação autorizada, árvore limpa | `git fetch origin`, criar a partir de `origin/master` (ou `origin/main`, conforme a base do repositório alvo), ativar a branch e só então continuar |
-| Criação autorizada, árvore suja | **Impedimento.** Liste os pendentes (`git status --short`), explique que a criação exige árvore limpa e pare |
-| Criação recusada pelo usuário | Siga na branch atual. Não é impedimento |
-| Já está em `mario/{ISSUE}` | Siga, mesmo com árvore suja. Liste os pendentes e registre a pendência no `mario.status.md`, porque eles afetam o diff que a fase 3 descreve no `pr-text.md` |
+| O nome contém o código da issue | Siga o fluxo normalmente, com árvore limpa ou suja |
+| O nome **não** contém o código da issue | Notifique o usuário de que a branch atual não referencia a issue e **peça aprovação explícita** para prosseguir mesmo assim. Sem aprovação, pare. Silêncio não é aprovação |
 
-No impedimento por árvore suja, **não** faça stash, não descarte e não commite
-nada. A árvore é do usuário.
+Com a árvore suja, liste os pendentes (`git status --short`) e registre a
+pendência no `mario.status.md`, porque eles afetam o diff que a fase 3 descreve no
+`pr-text.md`. **Nunca** faça stash, descarte ou commit: a árvore é do usuário e o
+MARIO não tem permissão para alterá-la.
 
 ---
 
@@ -403,6 +403,7 @@ Valem em todas as fases, sem exceção e sem "só desta vez":
 
 - não compilar (não acionar `advpl-tlpp-compile`), não abrir o SmartClient, não
   executar testes;
+- não criar branch, não trocar de branch;
 - não fazer commit, não fazer push, não abrir pull request;
 - não publicar página no Confluence;
 - não fazer stash, não descartar e não commitar alteração pendente do usuário;
@@ -441,7 +442,7 @@ As duas cobrem o refinamento técnico e não devem tratar a mesma issue.
 
 Se a issue já tem artefatos em `.specs/fixes/{ISSUE}/` produzidos pela `gct-sdd`,
 avise o usuário antes de começar: seguir com o MARIO cria a mesma documentação em
-outra pasta e outra branch. Decida com ele entre aproveitar o que existe (movendo
+outra pasta. Decida com ele entre aproveitar o que existe (movendo
 para `.specs/mario/{ISSUE}/`) ou recomeçar.
 
 ---
@@ -449,7 +450,7 @@ para `.specs/mario/{ISSUE}/`) ou recomeçar.
 ## Checklist de encerramento de fase
 
 - [ ] Preflight executado; fluxo selecionado pelo issuetype e registrado; modo degradado e steerings aplicáveis registrados, se houver.
-- [ ] Branch conferida e o desfecho aplicado.
+- [ ] Nome da branch verificado quanto ao código da issue; se ausente, aprovação explícita do usuário registrada.
 - [ ] Regras das steerings aplicáveis a esta fase foram repassadas às delegações e conferidas nos artefatos produzidos.
 - [ ] Todos os artefatos da fase existem em `.specs/mario/{ISSUE}/`.
 - [ ] `git status --short` sem artefato de especificação fora da pasta da issue.

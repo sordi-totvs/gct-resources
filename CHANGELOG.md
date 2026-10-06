@@ -8,6 +8,16 @@ As datas das versões publicadas usam o formato mensal `YYYY-MM`.
 
 ## [Não publicado]
 
+### Modificado
+
+- Skill `mario` (1.3.0) e agente MARIO (`mario.agent.md` e `mario.json`): a
+  verificação de branch deixa de exigir o nome `mario/{ISSUE}` e passa a aceitar
+  qualquer nome de branch que contenha o código da issue, independentemente de
+  prefixo. Quando o nome não contém o código da issue, o usuário é notificado e
+  precisa aprovar explicitamente para o fluxo prosseguir. O estado da árvore (limpa
+  ou suja) deixa de influenciar essa verificação. Reforçado que a skill não cria
+  branch, não faz stash, descarte nem commit.
+
 ## [1.0.0] - 2026-10
 
 ### Adicionado

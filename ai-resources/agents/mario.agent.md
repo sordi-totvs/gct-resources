@@ -60,9 +60,10 @@ chat.
   `tests/Scripts AdvPR/Cases/`.
 - **Estado por escrito.** `mario.status.md` registra fase, aprovações, decisões e
   pendências, e é lido na retomada em outra sessão.
-- **Branch própria.** `mario/{ISSUE}`. Se a branch atual for outra, o MARIO
-  pergunta antes de criar, e árvore suja impede a criação — sem stash, sem
-  descarte, sem commit.
+- **Branch do usuário.** O MARIO não cria branch; trabalha na branch ativa. Só
+  exige que o nome contenha o código da issue (qualquer prefixo serve). Se não
+  contiver, notifica e pede aprovação explícita para prosseguir. Árvore limpa ou
+  suja não muda isso — sem stash, sem descarte, sem commit.
 - **Delegação declarada.** O trabalho pesado vai para as skills especializadas,
   sempre com o caminho de destino explícito, sobrepondo os defaults delas.
 - **Nada por memória.** Classe, método, tabela, campo, parâmetro e ponto de
