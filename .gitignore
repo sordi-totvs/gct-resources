@@ -5,3 +5,5 @@
 # Steering é versionado (não ignorar)
 !/.kiro/steering
 .vscode
+
+.specs
